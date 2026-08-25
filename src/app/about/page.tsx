@@ -24,23 +24,7 @@ export default function AboutPage() {
     <>
       <PageHero title={C.HERO_TITLE} subline={C.HERO_SUBLINE} />
 
-      {/* D-1 시작 */}
-      <Section space="md">
-        <SectionLabel>{C.START_LABEL}</SectionLabel>
-
-        <div className="max-w-2xl space-y-6">
-          {C.START_PARAGRAPHS.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="text-[16px] leading-[1.85] text-body sm:text-[17px]"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      </Section>
-
-      {/* D-2 만든 사람들 — ABOUT에서 가장 넓은 자리 */}
+      {/* 만든 사람들 — ABOUT의 첫 섹션이자 가장 넓은 자리 */}
       <Section tone="tint" space="xl">
         <SectionLabel>{C.TEAM_LABEL}</SectionLabel>
         <SectionTitle accentLine={C.TEAM_TITLE_ACCENT}>
@@ -82,7 +66,7 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      {/* D-3 함께하는 곳 — D-2보다 좁혀 마무리한다 */}
+      {/* 함께하는 곳 — 팀 섹션보다 좁혀 마무리한다 */}
       <Section space="md">
         <div className="mx-auto max-w-5xl">
           <SectionLabel>{C.PARTNERS_LABEL}</SectionLabel>

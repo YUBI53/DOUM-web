@@ -15,7 +15,7 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-white">
       <Container>
-        <div className="flex flex-col gap-12 py-16 sm:py-20 lg:flex-row lg:justify-between lg:gap-8">
+        <div className="flex flex-col gap-12 pb-16 pt-24 sm:pb-20 sm:pt-28 lg:flex-row lg:justify-between lg:gap-8">
           <div>
             <Logo />
             <p className="mt-4 text-[15px] font-medium text-ink">
