@@ -1,4 +1,3 @@
-import { HeroScene, type HeroSceneName } from '@/components/diagrams/HeroScene';
 import { Container } from '@/components/ui/Container';
 
 /**
@@ -12,13 +11,10 @@ export function PageHero({
   title,
   subline,
   actions,
-  scene,
 }: {
   title: string;
   subline?: string;
   actions?: React.ReactNode;
-  /** 오른쪽에 놓을 장면 일러스트 */
-  scene?: HeroSceneName;
 }) {
   return (
     <section className="relative overflow-hidden">
@@ -28,31 +24,19 @@ export function PageHero({
       />
 
       <Container className="relative">
-        <div
-          className={`gap-12 py-16 sm:py-24 ${
-            scene ? 'grid items-center lg:grid-cols-[1.1fr_1fr]' : ''
-          }`}
-        >
-          <div className={scene ? '' : 'max-w-2xl'}>
-            <h1 className="text-[27px] font-bold leading-[1.36] tracking-tightest text-ink sm:text-[36px] lg:text-[40px]">
-              {title}
-            </h1>
+        <div className="max-w-2xl py-16 sm:py-24">
+          <h1 className="text-[27px] font-bold leading-[1.36] tracking-tightest text-ink sm:text-[36px] lg:text-[40px]">
+            {title}
+          </h1>
 
-            {subline && (
-              <p className="mt-6 max-w-lg text-[18px] font-[450] leading-relaxed text-body sm:text-[19px]">
-                {subline}
-              </p>
-            )}
+          {subline && (
+            <p className="mt-6 max-w-lg text-[18px] font-[450] leading-relaxed text-body sm:text-[19px]">
+              {subline}
+            </p>
+          )}
 
-            {actions && (
-              <div className="mt-9 flex flex-wrap gap-3">{actions}</div>
-            )}
-          </div>
-
-          {scene && (
-            <div className="hidden justify-end lg:flex">
-              <HeroScene name={scene} />
-            </div>
+          {actions && (
+            <div className="mt-9 flex flex-wrap gap-3">{actions}</div>
           )}
         </div>
       </Container>

@@ -33,7 +33,6 @@ export default function ServicePage() {
             DEMO
           </Button>
         }
-        scene="visit"
       />
 
       {/* B-2 도움 종류 */}

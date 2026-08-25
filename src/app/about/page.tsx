@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHero title={C.HERO_TITLE} subline={C.HERO_SUBLINE} scene="land" />
+      <PageHero title={C.HERO_TITLE} subline={C.HERO_SUBLINE} />
 
       {/* D-1 시작 */}
       <Section space="md">
