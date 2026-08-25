@@ -4,7 +4,6 @@ import { PageHero } from '@/components/sections/PageHero';
 import { TeamPhotos } from '@/components/sections/about/TeamPhotos';
 import { Badge } from '@/components/ui/Badge';
 import { Surface } from '@/components/ui/Card';
-import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel, SectionTitle } from '@/components/ui/SectionLabel';
 import * as C from '@/lib/content/about';
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHero title={C.HERO_TITLE} subline={C.HERO_SUBLINE} />
+      <PageHero title={C.HERO_TITLE} subline={C.HERO_SUBLINE} scene="land" />
 
       {/* D-1 시작 */}
       <Section space="md">
@@ -49,12 +48,17 @@ export default function AboutPage() {
         </SectionTitle>
 
         <div className="mt-12 max-w-3xl space-y-7 sm:mt-14">
-          {C.TEAM_PARAGRAPHS.map((paragraph) => (
+          {C.TEAM_PARAGRAPHS.map((lines) => (
             <p
-              key={paragraph}
-              className="text-[17px] leading-[1.85] text-body sm:text-[18px]"
+              key={lines[0]}
+              className="text-[16px] leading-[1.85] text-body sm:text-[17px]"
             >
-              {paragraph}
+              {/* 넓은 화면에서는 적어둔 대로 끊고, 좁으면 자연스럽게 흐르게 둔다 */}
+              {lines.map((line) => (
+                <span key={line} className="lg:block">
+                  {line}{' '}
+                </span>
+              ))}
             </p>
           ))}
         </div>
@@ -62,15 +66,17 @@ export default function AboutPage() {
         {/* 사진을 받으면 TeamPhotos.tsx의 PHOTOS만 채우면 여기에 나온다 */}
         <TeamPhotos />
 
-        <ul className="mt-14 grid gap-3 sm:mt-16 sm:grid-cols-3 lg:grid-cols-5">
-          {C.TEAM_MEMBERS.map((name) => (
-            <li key={name}>
-              {/* 나중에 한 줄 소개가 붙을 수 있게 아래 여백을 미리 잡아둔다 */}
-              <Surface className="flex h-full flex-col justify-between px-6 pb-10 pt-7">
-                <p className="text-[19px] font-bold tracking-tight text-ink">
-                  {name}
-                </p>
-              </Surface>
+        <ul className="mt-12 flex flex-wrap items-center gap-x-3 gap-y-2 sm:mt-14">
+          {C.TEAM_MEMBERS.map((name, i) => (
+            <li key={name} className="flex items-center gap-3">
+              {i > 0 && (
+                <span className="text-muted" aria-hidden>
+                  ·
+                </span>
+              )}
+              <span className="text-[15px] font-bold tracking-tight text-ink">
+                {name}
+              </span>
             </li>
           ))}
         </ul>
@@ -82,7 +88,7 @@ export default function AboutPage() {
           <SectionLabel>{C.PARTNERS_LABEL}</SectionLabel>
           <SectionTitle>{C.PARTNERS_TITLE}</SectionTitle>
 
-          <div className="mt-12 grid gap-6 sm:mt-14 sm:grid-cols-2">
+          <div className="mt-12 grid gap-8 sm:mt-14 sm:grid-cols-2 lg:gap-10">
             {C.PARTNERS.map((partner) => (
               <Surface key={partner.name} className="p-8 sm:p-10">
                 <Badge tone="neutral">{partner.role}</Badge>

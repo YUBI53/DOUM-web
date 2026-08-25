@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 
 import { StepFlow } from '@/components/diagrams/StepFlow';
 import { AdminDashboardMockup } from '@/components/mockups/AdminDashboardMockup';
-import { AppScreenMockup } from '@/components/mockups/AppScreenMockup';
 import { PageHero } from '@/components/sections/PageHero';
 import { Button } from '@/components/ui/Button';
 import { Card, Surface } from '@/components/ui/Card';
@@ -34,6 +33,7 @@ export default function ServicePage() {
             DEMO
           </Button>
         }
+        scene="visit"
       />
 
       {/* B-2 도움 종류 */}

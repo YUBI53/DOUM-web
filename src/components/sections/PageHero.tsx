@@ -1,3 +1,4 @@
+import { HeroScene, type HeroSceneName } from '@/components/diagrams/HeroScene';
 import { Container } from '@/components/ui/Container';
 
 /**
@@ -11,12 +12,13 @@ export function PageHero({
   title,
   subline,
   actions,
-  aside,
+  scene,
 }: {
   title: string;
   subline?: string;
   actions?: React.ReactNode;
-  aside?: React.ReactNode;
+  /** 오른쪽에 놓을 장면 일러스트 */
+  scene?: HeroSceneName;
 }) {
   return (
     <section className="relative overflow-hidden">
@@ -28,10 +30,10 @@ export function PageHero({
       <Container className="relative">
         <div
           className={`gap-12 py-16 sm:py-24 ${
-            aside ? 'grid items-center lg:grid-cols-[1.15fr_1fr]' : ''
+            scene ? 'grid items-center lg:grid-cols-[1.1fr_1fr]' : ''
           }`}
         >
-          <div className={aside ? '' : 'max-w-2xl'}>
+          <div className={scene ? '' : 'max-w-2xl'}>
             <h1 className="text-[27px] font-bold leading-[1.36] tracking-tightest text-ink sm:text-[36px] lg:text-[40px]">
               {title}
             </h1>
@@ -47,8 +49,10 @@ export function PageHero({
             )}
           </div>
 
-          {aside && (
-            <div className="flex justify-center lg:justify-end">{aside}</div>
+          {scene && (
+            <div className="hidden justify-end lg:flex">
+              <HeroScene name={scene} />
+            </div>
           )}
         </div>
       </Container>

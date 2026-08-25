@@ -41,6 +41,7 @@ export default function ManagerPage() {
             </Button>
           </>
         }
+        scene="village"
       />
 
       {/* C-2 하는 일 */}

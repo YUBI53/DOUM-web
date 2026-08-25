@@ -27,10 +27,20 @@ export function PreviewSection() {
 function PreviewCard({ band }: { band: PreviewBandData }) {
   return (
     <Surface className="p-8 sm:p-12 lg:p-14">
-      <SectionLabel>{band.label}</SectionLabel>
-      <SectionTitle accentLine={band.titleAccent}>{band.title}</SectionTitle>
+      {/* 제목과 버튼을 한 행에 두고, 버튼은 우측 상단에 붙인다 */}
+      <div className="flex flex-col gap-7 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
+        <div className="min-w-0">
+          <SectionLabel>{band.label}</SectionLabel>
+          <SectionTitle accentLine={band.titleAccent}>{band.title}</SectionTitle>
+        </div>
 
-      <ul className="mt-12 grid gap-6 sm:grid-cols-3 sm:gap-8">
+        <Button href={band.href} size="xl" className="shrink-0">
+          {band.linkLabel}
+          <span aria-hidden>→</span>
+        </Button>
+      </div>
+
+      <ul className="mt-16 grid gap-6 sm:mt-20 sm:grid-cols-3 sm:gap-8">
         {band.points.map((point, i) => (
           <li key={point} className="flex items-start gap-4">
             <PointIcon name={band.icons[i]} />
@@ -40,13 +50,6 @@ function PreviewCard({ band }: { band: PreviewBandData }) {
           </li>
         ))}
       </ul>
-
-      <div className="mt-12">
-        <Button href={band.href} size="xl">
-          {band.linkLabel}
-          <span aria-hidden>→</span>
-        </Button>
-      </div>
     </Surface>
   );
 }
