@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm view *)",
+      "Bash(mkdir -p src/fonts src/app src/components src/lib public)",
+      "Bash(cp node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2 src/fonts/)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s \"http://localhost:3000/opengraph-image\" -o /tmp/og-home.png -w \"%{content_type} %{size_download}\\\\n\")",
+      "Bash(curl -s \"http://localhost:3000/manager/opengraph-image\" -o /tmp/og-manager.png)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\\\\\(x86\\\\\\)/Google/Chrome/Application/**)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless=new --disable-gpu --hide-scrollbars --window-size=1440,3000 --screenshot=C:/Users/정채윤/AppData/Local/Temp/claude/c--Users-----Desktop-darori-web/4a39ec57-051d-4550-a585-8b07706adf8b/scratchpad/home-desktop.png --virtual-time-budget=8000 http://localhost:3000/)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless=new --disable-gpu --hide-scrollbars --window-size=1440,2100 --screenshot=C:/Users/정채윤/AppData/Local/Temp/claude/c--Users-----Desktop-darori-web/4a39ec57-051d-4550-a585-8b07706adf8b/scratchpad/reverted.png --virtual-time-budget=10000 http://localhost:3000/)"
+    ]
+  }
+}
