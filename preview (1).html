@@ -1,0 +1,1466 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Darori Mvp Prototype</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Darori Mvp Prototype" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Darori Mvp Prototype&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface], [data-visualize-standalone]) &gt; body {
+  padding: 12px;
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The shared runtime owns data-tooltip; suppress AppBlock&#x27;s pseudo-tooltip. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;darori-mvp&quot;&gt;
+  &lt;style&gt;
+    #darori-mvp{--d-bg:#fff;--d-surface:#fff;--d-text:#262626;--d-muted:#858585;--d-soft:#e9fbfb;--d-primary:#03beb8;--d-primary-dark:#009f9b;--d-amber:#ed8a00;--d-blue:#4b91dd;--d-red:#ff6666;--d-line:#e5e5e5;--d-r:18px;--d-cr:12px;color:var(--d-text);font-family:Pretendard,-apple-system,BlinkMacSystemFont,&quot;Apple SD Gothic Neo&quot;,sans-serif;font-size:15px;line-height:1.45;display:flex;justify-content:center;padding:10px 0 24px}
+    #darori-mvp *{box-sizing:border-box}#darori-mvp [hidden]{display:none!important}#darori-mvp button,#darori-mvp input,#darori-mvp textarea,#darori-mvp select{font:inherit}#darori-mvp button{cursor:pointer}
+    .d-phone{width:min(100%,393px);min-height:893px;background:var(--d-bg);border:1px solid #ececec;border-radius:28px;overflow:hidden;box-shadow:0 16px 42px rgba(0,0,0,.09);display:flex;flex-direction:column}
+    .d-top{height:76px;padding:24px 34px 10px;display:flex;align-items:center;justify-content:space-between}.d-logo{font-size:21px;font-weight:800;letter-spacing:-.06em;color:#111}.d-logo i{display:inline-block;width:18px;height:18px;background:#59cfcc;border-radius:50% 50% 50% 0;transform:rotate(-45deg);margin:0 4px 0 0;vertical-align:-2px}.d-top small{font-size:0;color:#111;width:24px;height:24px;position:relative}.d-top small::before{content:&#x27;&#x27;;width:16px;height:15px;border:2px solid #222;border-radius:10px 10px 4px 4px;position:absolute;left:3px;top:1px}.d-top small::after{content:&#x27;&#x27;;width:6px;height:6px;background:var(--d-primary);border-radius:50%;position:absolute;right:0;top:-2px}
+    .d-main{flex:1;padding:28px 34px 112px;overflow:auto}.d-screen{display:none}.d-screen.active{display:block}.d-eyebrow{color:var(--d-muted);font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px}.d-main h1{font-size:24px;line-height:1.18;letter-spacing:-.06em;margin:0 0 10px;font-weight:700}.d-main h2{font-size:16px;line-height:1.3;margin:0 0 11px;letter-spacing:-.04em}.d-main h3{font-size:15px;margin:0 0 5px}.d-muted{color:var(--d-muted)}.d-small{font-size:12px}.d-stack{display:grid;gap:11px}.d-surface{background:var(--d-surface);border:1px solid var(--d-line);border-radius:var(--d-r);padding:15px}.d-divider{height:1px;background:var(--d-line);margin:14px 0}.d-row{display:flex;justify-content:space-between;align-items:center;gap:10px}.d-btn{border:0;border-radius:var(--d-cr);min-height:52px;padding:0 14px}.d-primary{background:var(--d-primary);color:#fff;font-weight:700}.d-soft{background:var(--d-soft);color:var(--d-primary-dark)}.d-ghost{background:transparent;color:var(--d-muted)}.d-danger{background:#fff5f3;color:var(--d-red);border:1px solid #ffd5ce}.d-actions{display:grid;gap:8px;margin-top:13px}.d-pill{display:inline-flex;align-items:center;min-height:23px;padding:0 8px;border-radius:99px;background:#fff;color:var(--d-primary-dark);border:1px solid currentColor;font-size:10px;font-weight:700;white-space:nowrap}.d-pill.amber{background:#fffaf3;color:var(--d-amber)}.d-pill.blue{background:#f5f9ff;color:var(--d-blue)}.d-pill.red{background:#fff6f6;color:var(--d-red)}
+    .d-form{display:grid;gap:16px;margin-top:22px}.d-field{display:grid;gap:7px}.d-field label{color:var(--d-text);font-size:14px;font-weight:700;letter-spacing:-.03em}.d-field input,.d-field textarea,.d-field select{width:100%;border:1px solid var(--d-line);border-radius:14px;background:#fff;color:var(--d-text);padding:10px 13px;font-size:14px;outline:0}.d-field input{height:50px}.d-field textarea{min-height:86px;resize:vertical}.d-field input:focus,.d-field textarea:focus,.d-field select:focus{border-color:var(--d-primary);box-shadow:0 0 0 3px rgba(3,190,184,.12)}.d-check{display:flex;gap:9px;align-items:center;color:var(--d-text);font-size:13px}.d-check input{accent-color:var(--d-primary)}
+    .d-login{min-height:700px;display:flex;flex-direction:column;justify-content:center;padding:13px 0}.d-login-title{font-size:36px;line-height:1.06;letter-spacing:-.08em;font-weight:700;margin:0 0 10px}.d-demo{display:grid;gap:7px;margin-top:20px}.d-demo button{background:transparent;color:var(--d-muted);border:0;text-align:left;font-size:12px;padding:4px 0}.d-role{display:grid;gap:10px;margin:24px 0 15px}.d-role button{text-align:left;min-height:91px;padding:14px;background:#fff;border:1px solid var(--d-line);border-radius:var(--d-r);color:var(--d-text)}.d-role button.selected{border:1.5px solid var(--d-primary);background:var(--d-soft)}.d-role strong{display:block;font-size:17px;margin-bottom:4px}.d-role span{font-size:13px;color:var(--d-muted)}.d-note{background:var(--d-soft);color:var(--d-primary-dark);border-radius:var(--d-cr);padding:11px 12px;font-size:12px;margin-top:13px}.d-back{border:0;background:transparent;color:#444;padding:0 0 16px;margin-left:-6px;font-size:14px}
+    .d-avatar{width:48px;height:48px;border-radius:50%;background:#dff8f7;color:var(--d-primary-dark);display:grid;place-items:center;font-weight:700}.d-avatar.sm{width:38px;height:38px;font-size:12px}.d-profile{display:flex;align-items:center;gap:11px}.d-list{display:grid;gap:0}.d-item{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--d-line);padding:11px 0}.d-item:last-child{border-bottom:0;padding-bottom:0}.d-status{font-size:11px;color:var(--d-primary-dark);white-space:nowrap}.d-schedule{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:77px;text-align:left;background:#fff;color:var(--d-text);border:1px solid var(--d-line);border-radius:var(--d-r);padding:13px 14px}.d-schedule strong{display:block;font-size:16px;margin-bottom:3px}.d-schedule span{display:block;color:var(--d-muted);font-size:12px}.d-arrow{font-size:22px;color:#aaa}.d-nav{height:76px;margin-top:-76px;background:rgba(255,255,255,.98);border-top:1px solid #ededed;display:grid;grid-template-columns:repeat(4,1fr);padding:9px 8px 7px}.d-nav button{border:0;background:transparent;color:#b1b1b1;font-size:10px;display:grid;place-items:center;gap:2px}.d-nav button.active{color:var(--d-primary-dark);font-weight:700}.d-nav b{font-size:20px;line-height:1;font-weight:400}.d-choice{display:flex;flex-wrap:wrap;gap:7px}.d-choice button{border:1px solid var(--d-line);background:#fff;border-radius:99px;padding:8px 10px;color:var(--d-text);font-size:12px}.d-choice button.selected{border-color:var(--d-primary);background:var(--d-soft);color:var(--d-primary-dark);font-weight:600}.d-mini{padding:11px 12px;border-radius:var(--d-cr);background:var(--d-soft);font-size:12px}.d-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.d-kpi{background:#fff;border:1px solid var(--d-line);border-radius:var(--d-r);padding:12px}.d-kpi strong{display:block;font-size:21px;margin-top:3px}.d-kpi span{font-size:11px;color:var(--d-muted)}.d-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.d-toolbar button{border:0;background:transparent;color:var(--d-primary-dark);font-size:12px}.d-empty{padding:26px 14px;text-align:center;color:var(--d-muted);font-size:13px}.d-calendar{background:#fff;border:1px solid var(--d-line);border-radius:var(--d-r);padding:14px 10px}.d-calendar-head,.d-calendar-week,.d-calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}.d-calendar-head{grid-template-columns:40px 1fr 40px;align-items:center;margin-bottom:13px}.d-calendar-head button{border:0;background:transparent;color:var(--d-muted);font-size:22px}.d-calendar-head strong{font-size:17px}.d-calendar-week{color:var(--d-muted);font-size:11px;margin-bottom:7px}.d-calendar-week span:first-child{color:var(--d-red)}.d-calendar-week span:last-child{color:var(--d-blue)}.d-day{min-height:39px;display:grid;place-items:center;position:relative;font-size:13px;border:0;background:transparent;color:var(--d-text);border-radius:50%}.d-day.selected{background:var(--d-primary);color:#fff;font-weight:600}.d-day .dots{position:absolute;bottom:1px;display:flex;gap:2px}.d-dot{width:5px;height:5px;border-radius:50%;background:#bbb}.d-dot.blue{background:#6f9ee8}.d-dot.green{background:#43c99c}.d-dot.red{background:var(--d-red)}.d-legend{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px;color:var(--d-muted);font-size:11px}.d-legend span{display:flex;align-items:center;gap:4px}.d-edit-section{margin-top:12px}.d-edit-section h2{margin-bottom:5px}.d-edit-section p{margin:0 0 12px}.d-choice.compact button{padding:7px 9px}
+    section[data-screen=&quot;new-request&quot;] .d-choice,section[data-screen=&quot;regular-change&quot;] .d-choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}section[data-screen=&quot;new-request&quot;] .d-choice button,section[data-screen=&quot;regular-change&quot;] .d-choice button{min-height:94px;border-radius:18px;padding:10px 6px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}section[data-screen=&quot;new-request&quot;] .d-choice button::before,section[data-screen=&quot;regular-change&quot;] .d-choice button::before{content:&#x27;⌁&#x27;;width:38px;height:38px;border:1.5px solid var(--d-primary);border-radius:50%;display:grid;place-items:center;color:var(--d-primary);font-size:22px;line-height:1}section[data-screen=&quot;new-request&quot;] .d-choice button:nth-child(2)::before,section[data-screen=&quot;regular-change&quot;] .d-choice button:nth-child(2)::before{content:&#x27;♢&#x27;}section[data-screen=&quot;new-request&quot;] .d-choice button:nth-child(3)::before,section[data-screen=&quot;regular-change&quot;] .d-choice button:nth-child(3)::before{content:&#x27;⌂&#x27;}section[data-screen=&quot;new-request&quot;] .d-choice button:nth-child(4)::before,section[data-screen=&quot;regular-change&quot;] .d-choice button:nth-child(4)::before{content:&#x27;▤&#x27;}section[data-screen=&quot;new-request&quot;] .d-choice button.selected,section[data-screen=&quot;regular-change&quot;] .d-choice button.selected{background:#c6f6f5;color:var(--d-primary-dark);border-color:var(--d-primary)}
+    .d-home-intro{display:flex;align-items:center;justify-content:space-between;margin:3px 0 18px}.d-home-intro h1{font-size:21px;margin-bottom:5px}.d-home-intro p{margin:0;font-size:13px}.d-home-intro .d-avatar{width:52px;height:52px;font-size:20px}.d-next-card{padding:18px 16px;text-align:center}.d-next-card h2{margin-bottom:5px}.d-next-card p{margin:0 0 13px;color:var(--d-muted);font-size:12px}.d-next-card .d-btn{width:100%;min-height:42px}.d-section-head{display:flex;align-items:center;justify-content:space-between;margin:27px 0 10px}.d-section-head h2{margin:0}.d-section-head button{border:0;background:transparent;color:var(--d-muted);font-size:12px}.d-schedule strong .d-pill{display:inline-flex;min-height:18px;margin-left:4px;padding:0 6px;font-size:9px;vertical-align:middle}
+  &lt;/style&gt;
+  &lt;div class=&quot;d-phone&quot;&gt;
+    &lt;header class=&quot;d-top&quot;&gt;&lt;div class=&quot;d-logo&quot;&gt;&lt;i aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;DOUM&lt;/div&gt;&lt;small id=&quot;d-mode&quot;&gt;로그인&lt;/small&gt;&lt;/header&gt;
+    &lt;main class=&quot;d-main&quot;&gt;
+      &lt;section class=&quot;d-screen active&quot; data-screen=&quot;login-role&quot;&gt;&lt;div class=&quot;d-login&quot;&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;CARE TOGETHER&lt;/div&gt;&lt;div class=&quot;d-login-title&quot;&gt;누구로&lt;br&gt;시작할까요?&lt;/div&gt;&lt;p class=&quot;d-muted&quot;&gt;다로리에서 사용할 계정을 선택해 주세요.&lt;/p&gt;&lt;div class=&quot;d-role&quot;&gt;&lt;button data-screen-go=&quot;login&quot;&gt;&lt;strong&gt;돌봄 요청자&lt;/strong&gt;&lt;span&gt;돌봄을 요청하고 일정과 일지를 확인해요.&lt;/span&gt;&lt;/button&gt;&lt;button data-screen-go=&quot;helper-login&quot;&gt;&lt;strong&gt;돌봄 매니저&lt;/strong&gt;&lt;span&gt;배정된 돌봄과 활동을 관리해요.&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;login&quot;&gt;&lt;div class=&quot;d-login&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;login-role&quot;&gt;← 역할 선택&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;REQUESTER LOGIN&lt;/div&gt;&lt;div class=&quot;d-login-title&quot;&gt;돌봄 요청자&lt;br&gt;로그인&lt;/div&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label for=&quot;d-email&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;d-email&quot; placeholder=&quot;이메일을 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label for=&quot;d-password&quot;&gt;Password&lt;/label&gt;&lt;input id=&quot;d-password&quot; type=&quot;password&quot; placeholder=&quot;비밀번호를 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;requester-home&quot;&gt;로그인&lt;/button&gt;&lt;button class=&quot;d-btn d-ghost&quot; data-screen-go=&quot;signup-role&quot;&gt;처음이라면 회원가입&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-demo&quot;&gt;&lt;span class=&quot;d-small d-muted&quot;&gt;데모 계정&lt;/span&gt;&lt;button data-screen-go=&quot;requester-home&quot;&gt;요청자 계정으로 보기 · requester@example.com&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-login&quot;&gt;&lt;div class=&quot;d-login&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;login-role&quot;&gt;← 역할 선택&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;MANAGER LOGIN&lt;/div&gt;&lt;div class=&quot;d-login-title&quot;&gt;돌봄 매니저&lt;br&gt;로그인&lt;/div&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;Email&lt;/label&gt;&lt;input placeholder=&quot;이메일을 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;Password&lt;/label&gt;&lt;input type=&quot;password&quot; placeholder=&quot;비밀번호를 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;helper-home&quot;&gt;로그인&lt;/button&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;helper-apply&quot;&gt;매니저 지원하기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-demo&quot;&gt;&lt;span class=&quot;d-small d-muted&quot;&gt;승인된 매니저만 로그인할 수 있어요.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-apply&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-login&quot;&gt;← 매니저 로그인&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;MANAGER APPLY&lt;/div&gt;&lt;h1&gt;돌봄 매니저&lt;br&gt;지원하기&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;계정 생성 후 지원서를 작성해 매니저 활동을 신청할 수 있어요.&lt;/p&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:22px&quot;&gt;&lt;h2&gt;지원 절차&lt;/h2&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span&gt;1. 계정 생성&lt;/span&gt;&lt;span class=&quot;d-status&quot;&gt;준비 중&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span&gt;2. 활동 정보·지원서 작성&lt;/span&gt;&lt;span class=&quot;d-status&quot;&gt;준비 중&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span&gt;3. 관리자 검토·승인&lt;/span&gt;&lt;span class=&quot;d-status&quot;&gt;준비 중&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;매니저 가입과 지원서 입력 화면은 다음 기획 단계에서 구현할 예정이에요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;signup-role&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;login&quot;&gt;← 로그인으로 돌아가기&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;SIGN UP&lt;/div&gt;&lt;h1&gt;어떤 계정으로&lt;br&gt;가입할까요?&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;본인과 보호자는 각각 계정을 만들고,&lt;br&gt;같은 돌봄 대상자에 연결할 수 있어요.&lt;/p&gt;&lt;div class=&quot;d-role&quot;&gt;&lt;button data-role=&quot;self&quot;&gt;&lt;strong&gt;본인으로 가입&lt;/strong&gt;&lt;span&gt;내 돌봄을 직접 요청하고 일지를 확인해요.&lt;/span&gt;&lt;/button&gt;&lt;button data-role=&quot;guardian&quot;&gt;&lt;strong&gt;보호자로 가입&lt;/strong&gt;&lt;span&gt;연결된 가족의 일정과 일지를 함께 확인해요.&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;button id=&quot;d-role-next&quot; class=&quot;d-btn d-primary&quot; disabled&gt;다음&lt;/button&gt;&lt;div class=&quot;d-note&quot;&gt;두 사람이 모두 가입하는 경우, 각자 계정을 만든 뒤 연결 요청과 상대방 승인을 거쳐요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;signup-form&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;signup-role&quot;&gt;← 가입 유형 다시 선택&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ACCOUNT&lt;/div&gt;&lt;h1&gt;기본 정보를&lt;br&gt;입력해 주세요&lt;/h1&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;이름&lt;/label&gt;&lt;input placeholder=&quot;이름을 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;이메일&lt;/label&gt;&lt;input placeholder=&quot;이메일을 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;비밀번호&lt;/label&gt;&lt;input type=&quot;password&quot; placeholder=&quot;비밀번호를 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;연락처&lt;/label&gt;&lt;input placeholder=&quot;연락처를 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;account-link&quot;&gt;가입하고 연결하기&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;account-link&quot;&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ACCOUNT LINK&lt;/div&gt;&lt;h1 id=&quot;d-link-title&quot;&gt;돌봄 대상자를&lt;br&gt;연결해 주세요&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;연결이 승인되면 같은 일정과 돌봄 일지를 확인할 수 있어요.&lt;/p&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:22px&quot;&gt;&lt;h2&gt;연결 코드 입력&lt;/h2&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;Connection code&lt;/label&gt;&lt;input placeholder=&quot;연결 코드를 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;requester-home&quot;&gt;연결 요청 보내기&lt;/button&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;requester-home&quot;&gt;나중에 연결하기&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;연결 요청은 상대방이 승인해야 완료돼요. 승인 전에는 서로의 돌봄 정보를 볼 수 없어요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;requester-home&quot;&gt;&lt;div class=&quot;d-home-intro&quot;&gt;&lt;div&gt;&lt;h1&gt;안녕하세요, 보호자님&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;경상북도 청도군 다로리&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;d-avatar&quot;&gt;◒&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface d-next-card&quot;&gt;&lt;h2&gt;다음 매니저 방문 예정은 08. 29 (토) 11:00&lt;/h2&gt;&lt;p&gt;긴급 돌봄이 필요하신가요?&lt;/p&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;new-request&quot;&gt;긴급 돌봄 요청하기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-section-head&quot;&gt;&lt;h2&gt;나의 요청&lt;/h2&gt;&lt;button data-screen-go=&quot;requester-history&quot;&gt;더 보기 →&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-stack&quot;&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;schedule-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;화·목 아이 픽업 &lt;em class=&quot;d-pill&quot;&gt;정기&lt;/em&gt;&lt;/strong&gt;&lt;span&gt;화양읍 00길 · 8월 25일 오전 11:00&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;d-pill blue&quot;&gt;검토 중&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;schedule-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;월·수 등하원 동행 &lt;em class=&quot;d-pill&quot;&gt;정기&lt;/em&gt;&lt;/strong&gt;&lt;span&gt;화양읍 00길 · 8월 25일 오후 4:30&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;d-pill amber&quot;&gt;반려&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;request-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;병원 진료 동행 &lt;em class=&quot;d-pill&quot;&gt;긴급&lt;/em&gt;&lt;/strong&gt;&lt;span&gt;화양읍 00길 · 9월 1일 오후 2:00&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;d-pill&quot;&gt;승인&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-section-head&quot;&gt;&lt;h2&gt;돌봄 일지 검토&lt;/h2&gt;&lt;button data-screen-go=&quot;mypage&quot;&gt;더 보기 →&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-empty&quot;&gt;매니저가 돌봄 일지를 제출하면 여기에서 확인할 수 있어요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;new-request&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;requester-home&quot;&gt;← 내 요청&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;NEW REQUEST&lt;/div&gt;&lt;h1&gt;어떤 도움이&lt;br&gt;필요한가요?&lt;/h1&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;돌봄 유형&lt;/label&gt;&lt;div class=&quot;d-choice&quot;&gt;&lt;button class=&quot;selected&quot;&gt;동행&lt;/button&gt;&lt;button&gt;병원·이동 라이딩&lt;/button&gt;&lt;button&gt;집안일 도움&lt;/button&gt;&lt;button&gt;식사 지원&lt;/button&gt;&lt;button&gt;기타&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;희망 날짜&lt;/label&gt;&lt;input type=&quot;date&quot; value=&quot;2026-09-01&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;희망 시간&lt;/label&gt;&lt;input type=&quot;time&quot; value=&quot;11:00&quot;&gt;&lt;/div&gt;&lt;label class=&quot;d-check&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt; 이 시간에 꼭 가야 해요&lt;/label&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;요청 사유·특이사항&lt;/label&gt;&lt;textarea placeholder=&quot;돌봄이 필요한 이유나 미리 알려야 할 내용을 적어 주세요&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;request-detail&quot;&gt;요청 보내기&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;schedule-detail&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;requester-home&quot;&gt;← 내 요청&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;REGULAR CARE&lt;/div&gt;&lt;h1&gt;화·목 아이 픽업&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;11:00 · 화양읍 · 이민지 매니저&lt;/p&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:18px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;다가오는 일정&lt;/h2&gt;&lt;span class=&quot;d-pill&quot;&gt;확정&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-list&quot;&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;08. 29 (토) 11:00&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;화양읍 · 아이 픽업&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;occurrence-change&quot;&gt;보기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;09. 01 (화) 11:00&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;화양읍 · 아이 픽업&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;occurrence-change&quot;&gt;보기&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;지난 돌봄 내역&lt;/h2&gt;&lt;span class=&quot;d-status&quot;&gt;일지 2건&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-list&quot;&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;08. 27 (목) 아이 픽업&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;이민지 매니저 · 완료&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;일지 보기&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;08. 25 (화) 아이 픽업&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;이민지 매니저 · 완료&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;일지 보기&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;regular-change&quot;&gt;정기 일정 변경 요청하기&lt;/button&gt;&lt;button class=&quot;d-btn d-ghost&quot; data-screen-go=&quot;requester-home&quot;&gt;돌아가기&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;occurrence-change&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;schedule-detail&quot;&gt;← 정기 일정 상세&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;UPCOMING CARE&lt;/div&gt;&lt;h1&gt;08. 29 일정&lt;/h1&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;div&gt;&lt;h2 style=&quot;margin-bottom:3px&quot;&gt;아이 픽업&lt;/h2&gt;&lt;p class=&quot;d-small d-muted&quot;&gt;11:00 · 화양읍&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;d-pill&quot;&gt;확정&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;occurrence-edit&quot;&gt;이번 일정 변경&lt;/button&gt;&lt;button class=&quot;d-btn d-danger&quot; data-screen-go=&quot;requester-home&quot;&gt;이번 일정 취소&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;정기 일정 전체를 바꾸려면 ‘정기 일정 변경 요청하기’를 이용해 주세요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;occurrence-edit&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;occurrence-change&quot;&gt;← 일정 상세&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ONE-TIME CHANGE&lt;/div&gt;&lt;h1&gt;이번 일정만&lt;br&gt;변경할까요?&lt;/h1&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;변경할 시간&lt;/label&gt;&lt;input type=&quot;time&quot; value=&quot;12:00&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;변경할 위치&lt;/label&gt;&lt;input value=&quot;화양읍&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;변경 사유&lt;/label&gt;&lt;textarea placeholder=&quot;변경이 필요한 이유를 적어 주세요&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;requester-home&quot;&gt;변경 요청 보내기&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;regular-change&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;schedule-detail&quot;&gt;← 정기 일정 상세&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;REGULAR CHANGE&lt;/div&gt;&lt;h1&gt;정기 일정 변경&lt;br&gt;요청하기&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;새 돌봄 요청과 같은 항목에 변경 사유를 더해 보내요.&lt;/p&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;돌봄 유형&lt;/label&gt;&lt;select&gt;&lt;option&gt;동행&lt;/option&gt;&lt;option&gt;병원·이동 라이딩&lt;/option&gt;&lt;option&gt;집안일 도움&lt;/option&gt;&lt;option&gt;식사 지원&lt;/option&gt;&lt;option&gt;기타&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;희망 요일·시간&lt;/label&gt;&lt;input value=&quot;수·금 11:00&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;활동 위치&lt;/label&gt;&lt;input value=&quot;화양읍&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;요청 사유·특이사항&lt;/label&gt;&lt;textarea placeholder=&quot;돌봄 내용이나 요청사항을 적어 주세요&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;변경 사유&lt;/label&gt;&lt;textarea placeholder=&quot;정기 일정 변경이 필요한 이유를 적어 주세요&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;notifications&quot;&gt;변경 요청 제출&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;request-detail&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;requester-home&quot;&gt;← 내 요청&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;REQUEST DETAIL&lt;/div&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h1&gt;병원 진료 동행&lt;/h1&gt;&lt;span class=&quot;d-pill amber&quot;&gt;접수됨&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;희망 일시&lt;/span&gt;&lt;b&gt;09. 01 (화) 14:00&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;돌봄 유형&lt;/span&gt;&lt;b&gt;동행&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;대상자&lt;/span&gt;&lt;b&gt;김아이 · 아동&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;담당 매니저&lt;/span&gt;&lt;b&gt;이민지&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;p class=&quot;d-small&quot;&gt;병원 진료 후 귀가 동행이 필요합니다.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h2&gt;메시지&lt;/h2&gt;&lt;div class=&quot;d-mini&quot;&gt;아직 메시지가 없어요.&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;input style=&quot;height:42px;border:.5px solid var(--d-line);border-radius:8px;padding:0 10px&quot; placeholder=&quot;메시지를 입력해 주세요&quot;&gt;&lt;button class=&quot;d-btn d-soft&quot;&gt;전송&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-danger&quot; style=&quot;width:100%;margin-top:12px&quot; data-screen-go=&quot;requester-home&quot;&gt;요청 취소&lt;/button&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;mypage&quot;&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;MY PAGE&lt;/div&gt;&lt;h1&gt;나의 돌봄&lt;/h1&gt;&lt;div class=&quot;d-stack&quot;&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-profile&quot;&gt;&lt;div class=&quot;d-avatar&quot;&gt;김&lt;/div&gt;&lt;div&gt;&lt;b&gt;김하늘&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;본인 계정 · 화양읍&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-pill&quot; style=&quot;margin-left:auto&quot;&gt;연결 완료&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;연결된 보호자&lt;/div&gt;&lt;b&gt;김서연 보호자&lt;/b&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;account-link&quot;&gt;연결 관리&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;정기 돌봄 담당 매니저&lt;/h2&gt;&lt;span class=&quot;d-status&quot;&gt;프로필 보기&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div class=&quot;d-profile&quot;&gt;&lt;div class=&quot;d-avatar sm&quot;&gt;이&lt;/div&gt;&lt;div&gt;&lt;b&gt;이민지 매니저&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;정기 돌봄 · 화양읍&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;돌봄 일지&lt;/h2&gt;&lt;button class=&quot;d-btn d-ghost&quot;&gt;전체 보기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-list&quot;&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;아이 픽업&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;08. 27 · 이민지 매니저&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;열람 가능&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;등하원 동행&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;08. 25 · 이민지 매니저&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;열람 가능&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;notifications&quot;&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;NOTIFICATIONS&lt;/div&gt;&lt;h1&gt;요청을 보냈어요&lt;/h1&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-profile&quot;&gt;&lt;div class=&quot;d-avatar&quot;&gt;✓&lt;/div&gt;&lt;div&gt;&lt;b&gt;정기 일정 변경 요청 접수&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;관리자와 매니저 확인 후 결과를 알려드릴게요.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; style=&quot;width:100%;margin-top:14px&quot; data-screen-go=&quot;requester-home&quot;&gt;내 요청으로 돌아가기&lt;/button&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;requester-history&quot;&gt;&lt;div class=&quot;d-toolbar&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;CARE HISTORY&lt;/div&gt;&lt;h1&gt;이용 내역&lt;/h1&gt;&lt;/div&gt;&lt;button data-screen-go=&quot;mypage&quot;&gt;마이페이지&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar&quot;&gt;&lt;div class=&quot;d-calendar-head&quot;&gt;&lt;button aria-label=&quot;이전 달&quot;&gt;‹&lt;/button&gt;&lt;strong&gt;2026년 8월&lt;/strong&gt;&lt;button aria-label=&quot;다음 달&quot;&gt;›&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar-week&quot;&gt;&lt;span&gt;일&lt;/span&gt;&lt;span&gt;월&lt;/span&gt;&lt;span&gt;화&lt;/span&gt;&lt;span&gt;수&lt;/span&gt;&lt;span&gt;목&lt;/span&gt;&lt;span&gt;금&lt;/span&gt;&lt;span&gt;토&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar-grid&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;button class=&quot;d-day&quot;&gt;1&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;2&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;3&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;4&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;5&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;6&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;7&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot red&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;8&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;9&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;10&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;11&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;12&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;13&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;14&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;15&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;16&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;17&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;18&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;19&lt;/button&gt;&lt;button class=&quot;d-day selected&quot;&gt;20&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;21&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;22&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;23&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;24&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;25&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;26&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;27&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;28&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;29&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;30&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;31&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-legend&quot;&gt;&lt;span&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt; 예정&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt; 활동 완료&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt; 일지 확인 가능&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot red&quot;&gt;&lt;/i&gt; 취소&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;8월 20일 돌봄&lt;/h2&gt;&lt;span class=&quot;d-pill&quot;&gt;일지 확인 가능&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;11:00–12:00 · 아이 픽업&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;이민지 매니저 · 화양읍&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;schedule-detail&quot;&gt;상세&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;돌봄 일지&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;활동 내용과 특이사항을 확인할 수 있어요.&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;열람&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-home&quot;&gt;&lt;div class=&quot;d-toolbar&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;HOME&lt;/div&gt;&lt;h1&gt;안녕하세요, 김도움님&lt;/h1&gt;&lt;/div&gt;&lt;button data-screen-go=&quot;helper-profile&quot;&gt;마이페이지&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;긴급 돌봄 요청&lt;/h2&gt;&lt;span class=&quot;d-pill amber&quot;&gt;1건&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;김아이 · 동행&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;09. 01 14:00 · 청도읍 · 꼭 해당 시간&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;helper-request-detail&quot;&gt;확인&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;오늘·다가오는 돌봄&lt;/h2&gt;&lt;span class=&quot;d-status&quot;&gt;2건&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;오늘 11:00 · 김아이&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;화양읍 · 아이 픽업&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-pill blue&quot;&gt;예정&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;내일 16:30 · 김어르신&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;청도읍 · 병원 동행&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;확정&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;돌봄 관련 알림&lt;/h2&gt;&lt;span class=&quot;d-pill red&quot;&gt;3건&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;정기 일정 변경 요청&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;김아이 · 수·금 11:00으로 변경 요청&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;확인&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;일지 제출 필요&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;08. 27 아이 픽업 · 미제출&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;작성&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;신규 매칭&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;김어르신 정기 돌봄 배정&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;확인&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-care&quot;&gt;&lt;div class=&quot;d-toolbar&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;CARE MANAGEMENT&lt;/div&gt;&lt;h1&gt;돌봄 관리&lt;/h1&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;돌봄방 2개&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;d-muted&quot;&gt;요청자별 돌봄방에서 일정, 돌봄 내용, 채팅, 활동일지를 관리해요.&lt;/p&gt;&lt;div class=&quot;d-stack&quot; style=&quot;margin-top:18px&quot;&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;helper-regular-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;김아이 돌봄방&lt;/strong&gt;&lt;span&gt;김하늘 요청자 · 아동&lt;br&gt;화·목 아이 픽업 · 11:00 · 화양읍&lt;br&gt;다음 돌봄 08. 29&lt;/span&gt;&lt;/span&gt;&lt;b class=&quot;d-arrow&quot;&gt;›&lt;/b&gt;&lt;/button&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;helper-regular-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;김어르신 돌봄방&lt;/strong&gt;&lt;span&gt;박서연 요청자 · 어르신&lt;br&gt;월·수 병원 동행 · 16:30 · 청도읍&lt;br&gt;다음 돌봄 09. 01&lt;/span&gt;&lt;/span&gt;&lt;b class=&quot;d-arrow&quot;&gt;›&lt;/b&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;돌봄방을 누르면 정기 일정과 지난 내역, 요청자 프로필, 돌봄 일지, 채팅을 한곳에서 확인할 수 있어요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-history&quot;&gt;&lt;div class=&quot;d-toolbar&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ACTIVITY HISTORY&lt;/div&gt;&lt;h1&gt;활동 이력&lt;/h1&gt;&lt;/div&gt;&lt;button data-screen-go=&quot;helper-profile&quot;&gt;마이페이지&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-kpis&quot;&gt;&lt;div class=&quot;d-kpi&quot;&gt;&lt;span&gt;이번 달 활동 횟수&lt;/span&gt;&lt;strong&gt;8회&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;d-kpi&quot;&gt;&lt;span&gt;총 활동 시간&lt;/span&gt;&lt;strong&gt;14.5시간&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;d-kpi&quot;&gt;&lt;span&gt;월 정산 예정 금액&lt;/span&gt;&lt;strong&gt;₩240,000&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;d-kpi&quot;&gt;&lt;span&gt;일지 제출 필요&lt;/span&gt;&lt;strong&gt;1건&lt;/strong&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-calendar-head&quot;&gt;&lt;button aria-label=&quot;이전 달&quot;&gt;‹&lt;/button&gt;&lt;strong&gt;2026년 8월&lt;/strong&gt;&lt;button aria-label=&quot;다음 달&quot;&gt;›&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar-week&quot;&gt;&lt;span&gt;일&lt;/span&gt;&lt;span&gt;월&lt;/span&gt;&lt;span&gt;화&lt;/span&gt;&lt;span&gt;수&lt;/span&gt;&lt;span&gt;목&lt;/span&gt;&lt;span&gt;금&lt;/span&gt;&lt;span&gt;토&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar-grid&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;button class=&quot;d-day&quot;&gt;1&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;2&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;3&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;4&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;5&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;6&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;7&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot red&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;8&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;9&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;10&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;11&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;12&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;13&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;14&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;15&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;16&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;17&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;18&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;19&lt;/button&gt;&lt;button class=&quot;d-day selected&quot;&gt;20&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;21&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;22&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;23&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;24&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;25&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;26&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;27&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;28&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;29&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;30&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;31&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-legend&quot;&gt;&lt;span&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt; 예정&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt; 활동 완료·일지 필요&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt; 일지 제출&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot red&quot;&gt;&lt;/i&gt; 취소&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;8월 20일 활동&lt;/h2&gt;&lt;span class=&quot;d-pill blue&quot;&gt;일지 작성 필요&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;11:00–12:00 · 김아이&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;아이 픽업 · 화양읍&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;log-new&quot;&gt;일지 작성&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;정산 반영&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;일지 제출 후 관리자 검토를 거쳐 반영돼요.&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;대기&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-requests&quot;&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;REQUESTS&lt;/div&gt;&lt;h1&gt;배정 요청&lt;/h1&gt;&lt;div class=&quot;d-stack&quot;&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;helper-request-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;김아이 · 동행&lt;/strong&gt;&lt;span&gt;09. 01 14:00 · 청도읍 · 접수됨&lt;/span&gt;&lt;/span&gt;&lt;b class=&quot;d-arrow&quot;&gt;›&lt;/b&gt;&lt;/button&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;helper-request-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;김어르신 · 병원·이동 라이딩&lt;/strong&gt;&lt;span&gt;08. 29 10:00 · 화양읍 · 확정&lt;/span&gt;&lt;/span&gt;&lt;b class=&quot;d-arrow&quot;&gt;›&lt;/b&gt;&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-request-detail&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-requests&quot;&gt;← 배정 요청&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;REQUEST DETAIL&lt;/div&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h1&gt;김아이 · 동행&lt;/h1&gt;&lt;span class=&quot;d-pill amber&quot;&gt;접수됨&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;희망 일시&lt;/span&gt;&lt;b&gt;09. 01 14:00&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;지역&lt;/span&gt;&lt;b&gt;청도읍&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;요청사항&lt;/span&gt;&lt;b&gt;병원 진료 후 귀가&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;activity&quot;&gt;이 시간 수락하기&lt;/button&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;helper-request-detail-propose&quot;&gt;다른 시간 제안&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h2&gt;메시지&lt;/h2&gt;&lt;div class=&quot;d-mini&quot;&gt;요청자와 대화할 수 있어요.&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-request-detail-propose&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-request-detail&quot;&gt;← 요청 상세&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;PROPOSE TIME&lt;/div&gt;&lt;h1&gt;다른 시간을&lt;br&gt;제안할까요?&lt;/h1&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;제안 시간&lt;/label&gt;&lt;input type=&quot;datetime-local&quot; value=&quot;2026-09-01T15:00&quot;&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;helper-requests&quot;&gt;시간 제안 보내기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;정확한 시간이 필요한 요청은 시간 제안이 불가능해요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;activity&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-requests&quot;&gt;← 요청 목록&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ACTIVITY&lt;/div&gt;&lt;h1&gt;활동 인증&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;김아이 · 09. 01 14:00 · 동행&lt;/p&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:20px&quot;&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;① 활동 시작&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;GPS 위치와 시작 시각을 기록해요.&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-pill&quot;&gt;대기&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;② 활동 종료&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;종료 후 활동일지를 작성해요.&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-pill amber&quot;&gt;잠김&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;activity-started&quot;&gt;활동 시작 인증&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;activity-started&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-requests&quot;&gt;← 요청 목록&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ACTIVITY&lt;/div&gt;&lt;h1&gt;활동을 마친 뒤&lt;br&gt;종료 인증을 해주세요&lt;/h1&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-profile&quot;&gt;&lt;div class=&quot;d-avatar&quot;&gt;✓&lt;/div&gt;&lt;div&gt;&lt;b&gt;활동 시작 인증 완료&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;GPS 위치·시각이 기록됐어요.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;log-new&quot;&gt;활동 종료 인증&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;logs&quot;&gt;&lt;div class=&quot;d-toolbar&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ACTIVITY LOGS&lt;/div&gt;&lt;h1&gt;활동일지&lt;/h1&gt;&lt;/div&gt;&lt;button data-screen-go=&quot;log-new&quot;&gt;+ 새 일지&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-stack&quot;&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;log-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;아이 픽업&lt;/strong&gt;&lt;span&gt;08. 27 · 검토 대기&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;d-pill amber&quot;&gt;검토 대기&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;d-schedule&quot; data-screen-go=&quot;log-detail&quot;&gt;&lt;span&gt;&lt;strong&gt;등하원 동행&lt;/strong&gt;&lt;span&gt;08. 25 · 승인&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;d-pill&quot;&gt;승인&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;log-new&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;logs&quot;&gt;← 활동일지&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;NEW LOG&lt;/div&gt;&lt;h1&gt;활동일지 작성&lt;/h1&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;대상자&lt;/label&gt;&lt;select&gt;&lt;option&gt;김아이&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;활동 유형&lt;/label&gt;&lt;select&gt;&lt;option&gt;일반&lt;/option&gt;&lt;option&gt;공동체&lt;/option&gt;&lt;option&gt;긴급&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;활동 장소&lt;/label&gt;&lt;input value=&quot;청도읍&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;활동 내용&lt;/label&gt;&lt;textarea placeholder=&quot;활동 내용을 작성해 주세요&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;특이사항&lt;/label&gt;&lt;textarea placeholder=&quot;특이사항이 있다면 적어 주세요&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;logs&quot;&gt;일지 제출하기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;제출 후 검토 대기 상태가 되며, 관리자 승인 후 활동비 정산에 반영돼요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;log-detail&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;logs&quot;&gt;← 활동일지&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;ACTIVITY LOG&lt;/div&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h1&gt;아이 픽업&lt;/h1&gt;&lt;span class=&quot;d-pill amber&quot;&gt;검토 대기&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;활동 일시&lt;/span&gt;&lt;b&gt;08. 27 11:00–12:00&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;대상자&lt;/span&gt;&lt;b&gt;김아이&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;활동 장소&lt;/span&gt;&lt;b&gt;청도읍&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;p class=&quot;d-small&quot;&gt;학교에서 집까지 안전하게 동행했습니다.&lt;/p&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-recipients&quot;&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;RECIPIENTS&lt;/div&gt;&lt;h1&gt;담당 대상자&lt;/h1&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-profile&quot;&gt;&lt;div class=&quot;d-avatar&quot;&gt;김&lt;/div&gt;&lt;div&gt;&lt;b&gt;김아이&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;아동 · 청도읍&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;돌봄 관련 메모&lt;/div&gt;&lt;p&gt;등하원 동행 시 천천히 걸어야 합니다.&lt;/p&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-payments&quot;&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;PAYMENTS&lt;/div&gt;&lt;h1&gt;출금·정산&lt;/h1&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;출금 가능 잔액&lt;/div&gt;&lt;div style=&quot;font-size:28px;font-weight:700;margin-top:3px&quot;&gt;₩180,000&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; style=&quot;width:100%;margin-top:13px&quot;&gt;출금 요청&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h2&gt;월별 정산 내역&lt;/h2&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;2026년 8월&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;활동 8건 · 승인&lt;/div&gt;&lt;/div&gt;&lt;b&gt;₩240,000&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-profile&quot;&gt;&lt;div class=&quot;d-toolbar&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;MY PAGE&lt;/div&gt;&lt;h1&gt;내 정보&lt;/h1&gt;&lt;/div&gt;&lt;button data-screen-go=&quot;helper-profile-edit&quot;&gt;편집&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-profile&quot;&gt;&lt;div class=&quot;d-avatar&quot;&gt;김&lt;/div&gt;&lt;div&gt;&lt;b&gt;김도움&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;활동 가능 · 교육 이수&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;거주 지역&lt;/span&gt;&lt;b&gt;청도읍&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;활동 가능 지역&lt;/span&gt;&lt;b&gt;청도읍 외 2곳&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;활동 가능 시간&lt;/span&gt;&lt;b&gt;평일 09:00–18:00&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;가능한 돌봄 유형&lt;/span&gt;&lt;b&gt;동행 · 식사 지원&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;자차 보유&lt;/span&gt;&lt;b&gt;있음&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;활동 조건을 변경하면 앞으로 들어오는 매칭에 반영돼요. 이미 확정된 정기 돌봄 일정은 별도의 일정 변경 요청이 필요해요.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-profile-edit&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-profile&quot;&gt;← 내 정보&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;EDIT PROFILE&lt;/div&gt;&lt;h1&gt;활동 조건 수정&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;새로운 돌봄 매칭에 반영될 정보를 수정해 주세요.&lt;/p&gt;&lt;div class=&quot;d-form&quot;&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;활동 가능 지역&lt;/label&gt;&lt;input value=&quot;청도읍, 화양읍, 풍각면&quot; placeholder=&quot;활동 가능한 지역을 입력해 주세요&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;활동 가능 시간&lt;/label&gt;&lt;input value=&quot;평일 09:00–18:00&quot; placeholder=&quot;예: 월·수·금 09:00–15:00&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;가능한 돌봄 유형&lt;/label&gt;&lt;div class=&quot;d-choice compact&quot;&gt;&lt;button class=&quot;selected&quot;&gt;동행&lt;/button&gt;&lt;button&gt;병원·이동 라이딩&lt;/button&gt;&lt;button class=&quot;selected&quot;&gt;식사 지원&lt;/button&gt;&lt;button&gt;집안일 도움&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-field&quot;&gt;&lt;label&gt;이동 가능 범위&lt;/label&gt;&lt;select&gt;&lt;option&gt;거주지 기준 10km 이내&lt;/option&gt;&lt;option&gt;청도군 전체&lt;/option&gt;&lt;option&gt;협의 가능&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;helper-profile&quot;&gt;수정 내용 저장&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;활동 가능 시간·지역·돌봄 유형은 매칭 조건에 반영됩니다. 확정된 일정은 자동으로 변경되지 않습니다.&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-regular-detail&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-care&quot;&gt;← 돌봄 관리&lt;/button&gt;&lt;div class=&quot;d-toolbar&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;CARE ROOM&lt;/div&gt;&lt;h1&gt;김아이 돌봄방&lt;/h1&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;김하늘 요청자 · 김아이 대상자&lt;/div&gt;&lt;/div&gt;&lt;button data-screen-go=&quot;helper-requester-profile&quot;&gt;요청자 프로필&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:16px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;정기 돌봄 일정&lt;/div&gt;&lt;h2 style=&quot;margin:3px 0&quot;&gt;화·목 아이 픽업&lt;/h2&gt;&lt;b&gt;매주 화·목 11:00 · 화양읍&lt;/b&gt;&lt;/div&gt;&lt;span class=&quot;d-pill&quot;&gt;진행 중&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;돌봄 내용&lt;/div&gt;&lt;p style=&quot;margin:4px 0 0&quot;&gt;학교에서 집까지 안전하게 동행해 주세요.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;div&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;가장 가까운 돌봄&lt;/div&gt;&lt;h2 style=&quot;margin:3px 0&quot;&gt;08. 29 (토) 11:00&lt;/h2&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;화양읍 · 아이 픽업&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-pill blue&quot;&gt;예정&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;button class=&quot;d-btn d-primary&quot; data-screen-go=&quot;activity&quot;&gt;활동 진행하기&lt;/button&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;helper-schedule-view&quot;&gt;돌봄 일정 보기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-note&quot;&gt;약속 시간이 되면 ‘활동 진행하기’에서 시작·종료 인증을 진행하고, 종료 후 활동일지를 작성해요.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;돌봄 일지&lt;/h2&gt;&lt;span class=&quot;d-status&quot;&gt;자동 연결&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;08. 27 아이 픽업&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;활동 완료 · 일지 제출 필요&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-pill amber&quot;&gt;작성&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;08. 25 아이 픽업&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;활동 완료 · 일지 제출 완료&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;확인&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;채팅&lt;/h2&gt;&lt;span class=&quot;d-status&quot;&gt;김하늘 요청자&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-mini&quot;&gt;안녕하세요, 이번 주 목요일도 잘 부탁드려요!&lt;/div&gt;&lt;div class=&quot;d-mini&quot; style=&quot;margin-top:7px;background:rgba(74,144,164,.1)&quot;&gt;네, 11시에 화양읍에서 뵐게요.&lt;/div&gt;&lt;div class=&quot;d-actions&quot;&gt;&lt;input style=&quot;height:42px;border:.5px solid var(--d-line);border-radius:8px;padding:0 10px&quot; placeholder=&quot;메시지를 입력해 주세요&quot;&gt;&lt;button class=&quot;d-btn d-soft&quot;&gt;전송&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-requester-profile&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-regular-detail&quot;&gt;← 김아이 돌봄방&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;REQUESTER PROFILE&lt;/div&gt;&lt;h1&gt;요청자 프로필&lt;/h1&gt;&lt;div class=&quot;d-surface&quot;&gt;&lt;div class=&quot;d-profile&quot;&gt;&lt;div class=&quot;d-avatar&quot;&gt;김&lt;/div&gt;&lt;div&gt;&lt;b&gt;김하늘&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;본인 요청자 · 보호자 연결 완료&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;돌봄 대상자&lt;/span&gt;&lt;b&gt;김아이 · 아동&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;연락 가능 시간&lt;/span&gt;&lt;b&gt;09:00–19:00&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;span class=&quot;d-muted&quot;&gt;주요 돌봄 유형&lt;/span&gt;&lt;b&gt;아이 픽업 · 동행&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;d-divider&quot;&gt;&lt;/div&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;돌봄 시 참고사항&lt;/div&gt;&lt;p&gt;하교 후 피곤해할 수 있어 천천히 이동해 주세요.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-soft&quot; style=&quot;width:100%;margin-top:12px&quot; data-screen-go=&quot;helper-regular-detail&quot;&gt;돌봄방으로 돌아가기&lt;/button&gt;&lt;/section&gt;
+      &lt;section class=&quot;d-screen&quot; data-screen=&quot;helper-schedule-view&quot;&gt;&lt;button class=&quot;d-back&quot; data-screen-go=&quot;helper-regular-detail&quot;&gt;← 김아이 돌봄방&lt;/button&gt;&lt;div class=&quot;d-eyebrow&quot;&gt;CARE SCHEDULE&lt;/div&gt;&lt;h1&gt;돌봄 일정&lt;/h1&gt;&lt;p class=&quot;d-muted&quot;&gt;화·목 아이 픽업 · 11:00 · 화양읍&lt;/p&gt;&lt;div class=&quot;d-calendar&quot; style=&quot;margin-top:16px&quot;&gt;&lt;div class=&quot;d-calendar-head&quot;&gt;&lt;button aria-label=&quot;이전 달&quot;&gt;‹&lt;/button&gt;&lt;strong&gt;2026년 8월&lt;/strong&gt;&lt;button aria-label=&quot;다음 달&quot;&gt;›&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar-week&quot;&gt;&lt;span&gt;일&lt;/span&gt;&lt;span&gt;월&lt;/span&gt;&lt;span&gt;화&lt;/span&gt;&lt;span&gt;수&lt;/span&gt;&lt;span&gt;목&lt;/span&gt;&lt;span&gt;금&lt;/span&gt;&lt;span&gt;토&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-calendar-grid&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;button class=&quot;d-day&quot;&gt;1&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;2&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;3&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;4&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;5&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;6&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;7&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;8&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;9&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;10&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;11&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;12&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;13&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;14&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;15&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;16&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;17&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;18&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;19&lt;/button&gt;&lt;button class=&quot;d-day selected&quot;&gt;20&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;21&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;22&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;23&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;24&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;25&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;26&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;27&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;28&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;29&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;30&lt;/button&gt;&lt;button class=&quot;d-day&quot;&gt;31&lt;div class=&quot;dots&quot;&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-legend&quot;&gt;&lt;span&gt;&lt;i class=&quot;d-dot&quot;&gt;&lt;/i&gt; 예정&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot blue&quot;&gt;&lt;/i&gt; 활동 완료&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;d-dot green&quot;&gt;&lt;/i&gt; 일지 제출&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d-surface&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;d-row&quot;&gt;&lt;h2&gt;8월 20일 활동&lt;/h2&gt;&lt;span class=&quot;d-pill green&quot;&gt;일지 확인&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;11:00–12:00 · 아이 픽업&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;활동 완료 · 화양읍&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;d-btn d-soft&quot; data-screen-go=&quot;log-detail&quot;&gt;일지 보기&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;d-item&quot;&gt;&lt;div&gt;&lt;b&gt;08. 29 (토) 11:00&lt;/b&gt;&lt;div class=&quot;d-small d-muted&quot;&gt;다음 돌봄 · 활동 진행하기&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;d-status&quot;&gt;예정&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+    &lt;/main&gt;
+    &lt;nav class=&quot;d-nav&quot; id=&quot;d-nav-requester&quot;&gt;&lt;button data-screen-go=&quot;requester-home&quot; class=&quot;active&quot;&gt;&lt;b&gt;⌂&lt;/b&gt;내 요청&lt;/button&gt;&lt;button data-screen-go=&quot;requester-history&quot;&gt;&lt;b&gt;◷&lt;/b&gt;이용 내역&lt;/button&gt;&lt;button data-screen-go=&quot;mypage&quot;&gt;&lt;b&gt;◯&lt;/b&gt;마이페이지&lt;/button&gt;&lt;button data-screen-go=&quot;notifications&quot;&gt;&lt;b&gt;♧&lt;/b&gt;알림&lt;/button&gt;&lt;/nav&gt;&lt;nav class=&quot;d-nav&quot; id=&quot;d-nav-helper&quot; hidden&gt;&lt;button data-screen-go=&quot;helper-home&quot; class=&quot;active&quot;&gt;&lt;b&gt;⌂&lt;/b&gt;홈&lt;/button&gt;&lt;button data-screen-go=&quot;helper-care&quot;&gt;&lt;b&gt;▣&lt;/b&gt;돌봄 관리&lt;/button&gt;&lt;button data-screen-go=&quot;helper-history&quot;&gt;&lt;b&gt;◷&lt;/b&gt;활동 이력&lt;/button&gt;&lt;button data-screen-go=&quot;helper-profile&quot;&gt;&lt;b&gt;◯&lt;/b&gt;마이페이지&lt;/button&gt;&lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    (()=&gt;{const root=document.getElementById(&#x27;darori-mvp&#x27;);const screens=[...root.querySelectorAll(&#x27;.d-screen&#x27;)];const mode=root.querySelector(&#x27;#d-mode&#x27;);const navRequester=root.querySelector(&#x27;#d-nav-requester&#x27;);const navHelper=root.querySelector(&#x27;#d-nav-helper&#x27;);let role=&#x27;REQUESTER&#x27;;let selectedRole=&#x27;&#x27;;const labels={login:&#x27;로그인&#x27;,&#x27;signup-role&#x27;:&#x27;회원가입&#x27;,&#x27;signup-form&#x27;:&#x27;회원가입&#x27;,&#x27;account-link&#x27;:&#x27;연결 승인&#x27;,&#x27;requester-home&#x27;:&#x27;요청자&#x27;,&#x27;requester-history&#x27;:&#x27;이용 내역&#x27;,&#x27;new-request&#x27;:&#x27;새 요청&#x27;,&#x27;schedule-detail&#x27;:&#x27;정기 일정&#x27;,&#x27;occurrence-change&#x27;:&#x27;일정 상세&#x27;,&#x27;occurrence-edit&#x27;:&#x27;일정 변경&#x27;,&#x27;regular-change&#x27;:&#x27;정기 변경&#x27;,&#x27;request-detail&#x27;:&#x27;요청 상세&#x27;,mypage:&#x27;마이페이지&#x27;,notifications:&#x27;알림&#x27;,&#x27;helper-home&#x27;:&#x27;돌봄 관리&#x27;,&#x27;helper-history&#x27;:&#x27;활동 이력&#x27;,&#x27;helper-requests&#x27;:&#x27;배정 요청&#x27;,&#x27;helper-request-detail&#x27;:&#x27;요청 상세&#x27;,&#x27;helper-request-detail-propose&#x27;:&#x27;시간 제안&#x27;,activity:&#x27;활동 인증&#x27;,&#x27;activity-started&#x27;:&#x27;활동 인증&#x27;,logs:&#x27;활동일지&#x27;,&#x27;log-new&#x27;:&#x27;새 일지&#x27;,&#x27;log-detail&#x27;:&#x27;활동일지&#x27;,&#x27;helper-recipients&#x27;:&#x27;대상자&#x27;,&#x27;helper-payments&#x27;:&#x27;정산&#x27;,&#x27;helper-profile&#x27;:&#x27;마이페이지&#x27;,&#x27;helper-profile-edit&#x27;:&#x27;활동 조건 수정&#x27;,&#x27;helper-regular-detail&#x27;:&#x27;돌봄방&#x27;,&#x27;helper-requester-profile&#x27;:&#x27;요청자 프로필&#x27;,&#x27;helper-schedule-view&#x27;:&#x27;돌봄 일정&#x27;};function go(name){screens.forEach(s=&gt;s.classList.toggle(&#x27;active&#x27;,s.dataset.screen===name));mode.textContent=labels[name]||&#x27;&#x27;;if(name.indexOf(&#x27;helper&#x27;)===0||name===&#x27;activity&#x27;||name===&#x27;activity-started&#x27;||name.indexOf(&#x27;log&#x27;)===0||name===&#x27;helper-history&#x27;){role=&#x27;HELPER&#x27;}if(name===&#x27;requester-home&#x27;||name===&#x27;requester-history&#x27;||name===&#x27;mypage&#x27;||name===&#x27;new-request&#x27;||name.indexOf(&#x27;schedule&#x27;)===0||name.indexOf(&#x27;occurrence&#x27;)===0||name.indexOf(&#x27;regular&#x27;)===0||name===&#x27;request-detail&#x27;||name===&#x27;notifications&#x27;){role=&#x27;REQUESTER&#x27;}const helperMode=role===&#x27;HELPER&#x27;;navRequester.hidden=helperMode;navHelper.hidden=!helperMode;const activeNav=helperMode?navHelper:navRequester;activeNav.querySelectorAll(&#x27;button&#x27;).forEach(b=&gt;b.classList.toggle(&#x27;active&#x27;,b.dataset.screenGo===name));root.querySelector(&#x27;.d-main&#x27;).scrollTop=0}root.querySelectorAll(&#x27;[data-screen-go]&#x27;).forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,()=&gt;{const n=b.dataset.screenGo;if(n===&#x27;helper-home&#x27;)role=&#x27;HELPER&#x27;;if(n===&#x27;requester-home&#x27;)role=&#x27;REQUESTER&#x27;;go(n)}));root.querySelectorAll(&#x27;[data-role]&#x27;).forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,()=&gt;{selectedRole=b.dataset.role;root.querySelectorAll(&#x27;[data-role]&#x27;).forEach(x=&gt;x.classList.toggle(&#x27;selected&#x27;,x===b));const next=root.querySelector(&#x27;#d-role-next&#x27;);next.disabled=false;next.style.opacity=&#x27;1&#x27;}));root.querySelector(&#x27;#d-role-next&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{root.querySelector(&#x27;#d-link-title&#x27;).innerHTML=selectedRole===&#x27;guardian&#x27;?&#x27;돌봄 대상자를&lt;br&gt;연결해 주세요&#x27;:&#x27;보호자와&lt;br&gt;연결해 주세요&#x27;;go(&#x27;signup-form&#x27;)});root.querySelectorAll(&#x27;.d-choice button&#x27;).forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,()=&gt;{b.parentElement.querySelectorAll(&#x27;button&#x27;).forEach(x=&gt;x.classList.remove(&#x27;selected&#x27;));b.classList.add(&#x27;selected&#x27;)}));root.querySelector(&#x27;#d-role-next&#x27;).style.opacity=&#x27;.55&#x27;})();
+  &lt;/script&gt;
+  &lt;script&gt;
+    (()=&gt;{const root=document.getElementById(&#x27;darori-mvp&#x27;);const nav=root.querySelector(&#x27;#d-nav-helper&#x27;);const mode=root.querySelector(&#x27;#d-mode&#x27;);const home=root.querySelector(&#x27;[data-screen=&quot;helper-home&quot;]&#x27;);if(!nav)return;const homeButton=nav.querySelector(&#x27;[data-screen-go=&quot;helper-home&quot;]&#x27;);const secondButton=nav.querySelectorAll(&#x27;button&#x27;)[1];if(homeButton)homeButton.innerHTML=&#x27;&lt;b&gt;⌂&lt;/b&gt;홈&#x27;;if(secondButton){secondButton.dataset.screenGo=&#x27;helper-care&#x27;;secondButton.innerHTML=&#x27;&lt;b&gt;▣&lt;/b&gt;돌봄 관리&#x27;}if(home){const eyebrow=home.querySelector(&#x27;.d-eyebrow&#x27;);if(eyebrow)eyebrow.textContent=&#x27;HOME&#x27;}nav.addEventListener(&#x27;click&#x27;,event=&gt;{const button=event.target.closest(&#x27;button&#x27;);if(!button)return;const labels={&quot;helper-home&quot;:&quot;홈&quot;,&quot;helper-care&quot;:&quot;돌봄 관리&quot;,&quot;helper-history&quot;:&quot;활동 이력&quot;,&quot;helper-profile&quot;:&quot;마이페이지&quot;};setTimeout(()=&gt;{mode.textContent=labels[button.dataset.screenGo]||mode.textContent},0)})})();
+  &lt;/script&gt;
+  &lt;script&gt;
+    (()=&gt;{const root=document.getElementById(&#x27;darori-mvp&#x27;);const room=root.querySelector(&#x27;[data-screen=&quot;helper-regular-detail&quot;]&#x27;);if(room){const next=[...room.querySelectorAll(&#x27;.d-small&#x27;)].find(x=&gt;x.textContent.trim()===&#x27;가장 가까운 돌봄&#x27;);if(next)next.textContent=&#x27;다음 돌봄 일정&#x27;;const scheduleButton=[...room.querySelectorAll(&#x27;button&#x27;)].find(x=&gt;x.textContent.trim()===&#x27;돌봄 일정 보기&#x27;);if(scheduleButton)scheduleButton.textContent=&#x27;일정 변경하기&#x27;}const history=root.querySelector(&#x27;[data-screen=&quot;helper-history&quot;]&#x27;);if(history&amp;&amp;!history.querySelector(&#x27;.d-history-filter&#x27;)){const wrap=document.createElement(&#x27;div&#x27;);wrap.className=&#x27;d-history-filter&#x27;;wrap.style.margin=&#x27;12px 0&#x27;;wrap.innerHTML=&#x27;&lt;div class=&quot;d-small d-muted&quot; style=&quot;margin-bottom:7px&quot;&gt;돌봄 대상자별 보기&lt;/div&gt;&lt;div class=&quot;d-choice&quot;&gt;&lt;button class=&quot;selected&quot;&gt;전체 대상자&lt;/button&gt;&lt;button&gt;김아이&lt;/button&gt;&lt;button&gt;김어르신&lt;/button&gt;&lt;/div&gt;&#x27;;const calendar=history.querySelector(&#x27;.d-calendar&#x27;);history.insertBefore(wrap,calendar);wrap.querySelectorAll(&#x27;button&#x27;).forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,()=&gt;{wrap.querySelectorAll(&#x27;button&#x27;).forEach(x=&gt;x.classList.remove(&#x27;selected&#x27;));b.classList.add(&#x27;selected&#x27;)}))}})();
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
+    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
+    document.removeEventListener(&quot;click&quot;, handleTouchClick);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
+  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
+  document.addEventListener(&quot;click&quot;, handleTouchClick);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>
