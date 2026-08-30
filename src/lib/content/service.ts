@@ -6,7 +6,7 @@ import type { CardItem, StepItem } from '@/lib/types';
 
 export const HERO_TITLE = '가까운 이웃이 찾아갑니다';
 export const HERO_SUBLINE =
-  '필요한 도움을 요청하면 같은 마을 돌봄매니저가 정해진 시간에 방문합니다.';
+  '정해진 요일에 같은 마을 돌봄매니저가 찾아옵니다. 급할 때는 그때그때 요청할 수도 있습니다.';
 
 // ─── B-2 도움 종류 ─────────────────────────────────────────────────────────
 
@@ -35,11 +35,70 @@ export const HELP_TYPES: readonly CardItem[] = [
     description: '반찬을 만들거나 배달해드려요',
   },
   {
+    icon: 'clock',
+    title: '아이 돌봄',
+    description: '등하원 동행, 하교 후 픽업을 맡아요',
+  },
+  {
     icon: 'plus',
     title: '그 외',
-    description: '하교 후 돌봄, 말벗 등 필요한 도움을 적어주세요',
+    description: '말벗 등 필요한 도움을 적어주세요',
   },
 ] as const;
+
+// ─── 돌봄 방식 ─────────────────────────────────────────────────────────────
+//
+// 앱은 정기 돌봄이 기본이고 긴급이 따로 있다.
+// 지금까지 사이트가 단발 요청만 설명해 서비스 성격이 다르게 읽혔다.
+
+export const MODE_LABEL = '돌봄 방식';
+export const MODE_TITLE = '두 가지 방법으로 요청해요';
+
+export const MODES = [
+  {
+    tag: '정기',
+    title: '요일을 정해두고 계속',
+    description:
+      '화·목 아이 픽업처럼 요일과 시간을 정해두면 같은 매니저가 그때마다 찾아와요. 한 번 정하면 매번 요청하지 않아도 돼요.',
+    points: [
+      '담당 매니저가 계속 이어져요',
+      '이번 주만 시간을 바꾸거나 쉴 수 있어요',
+      '요일 자체를 바꾸려면 변경을 요청해요',
+    ],
+  },
+  {
+    tag: '긴급',
+    title: '급할 때 그때그때',
+    description:
+      '병원에 급히 가야 하거나 오늘 당장 손이 필요할 때 요청해요. 활동할 수 있는 매니저에게 바로 전달돼요.',
+    points: [
+      '정기 돌봄과 따로 요청해요',
+      '"이 시간에 꼭 가야 해요"를 켜면 시간이 바뀌지 않아요',
+      '매니저가 수락하면 확정돼요',
+    ],
+  },
+] as const;
+
+// ─── 누가 요청하나 ─────────────────────────────────────────────────────────
+
+export const WHO_LABEL = '요청하는 사람';
+export const WHO_TITLE = '본인도, 가족도 요청할 수 있어요';
+
+export const WHO_TYPES: readonly CardItem[] = [
+  {
+    icon: 'home',
+    title: '본인 계정',
+    description: '내 돌봄을 직접 요청하고 일지를 확인해요',
+  },
+  {
+    icon: 'chat',
+    title: '보호자 계정',
+    description: '떨어져 사는 가족이 대신 요청하고 함께 확인해요',
+  },
+];
+
+export const WHO_NOTE =
+  '두 사람이 각각 계정을 만든 뒤 연결 코드로 이으면, 같은 일정과 돌봄 일지를 함께 봐요. 연결은 상대방이 승인해야 완료돼요.';
 
 // ─── B-3 이용 방법 ─────────────────────────────────────────────────────────
 
@@ -99,6 +158,11 @@ export const RECORD_POINTS: readonly CardItem[] = [
     icon: 'calendar',
     title: '약속한 시간',
     description: '약속한 시간은 임의로 바뀌지 않아요',
+  },
+  {
+    icon: 'walk',
+    title: '돌봄방',
+    description: '일정과 기록, 매니저와 나눈 대화가 한곳에 모여요',
   },
 ] as const;
 

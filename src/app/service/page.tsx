@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 
 import { StepFlow } from '@/components/diagrams/StepFlow';
 import { AdminDashboardMockup } from '@/components/mockups/AdminDashboardMockup';
+import { AppScreenMockup } from '@/components/mockups/AppScreenMockup';
 import { PageHero } from '@/components/sections/PageHero';
+import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, Surface } from '@/components/ui/Card';
 import { Icon } from '@/components/ui/Icon';
@@ -44,6 +46,69 @@ export default function ServicePage() {
           {C.HELP_TYPES.map((item) => (
             <Card key={item.title} {...item} />
           ))}
+        </div>
+      </Section>
+
+      {/* 돌봄 방식 — 정기가 기본이고 긴급이 따로 있다는 것을 먼저 밝힌다 */}
+      <Section space="md">
+        <SectionLabel>{C.MODE_LABEL}</SectionLabel>
+        <SectionTitle>{C.MODE_TITLE}</SectionTitle>
+
+        <div className="mt-12 grid gap-5 sm:mt-14 lg:grid-cols-2">
+          {C.MODES.map((mode) => (
+            <Surface key={mode.tag} className="p-8 sm:p-10">
+              <Badge tone={mode.tag === '정기' ? 'brand' : 'warn'}>
+                {mode.tag}
+              </Badge>
+              <h3 className="mt-5 text-[20px] font-bold tracking-tight text-ink sm:text-[22px]">
+                {mode.title}
+              </h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-body sm:text-base">
+                {mode.description}
+              </p>
+              <ul className="mt-6 space-y-2.5 border-t border-line pt-6">
+                {mode.points.map((point) => (
+                  <li
+                    key={point}
+                    className="flex items-start gap-2.5 text-[15px] leading-relaxed text-body"
+                  >
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-pill bg-brand"
+                      aria-hidden
+                    />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </Surface>
+          ))}
+        </div>
+      </Section>
+
+      {/* 요청하는 사람 — 본인 계정과 보호자 계정 */}
+      <Section space="md">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
+          <div>
+            <SectionLabel>{C.WHO_LABEL}</SectionLabel>
+            <SectionTitle>{C.WHO_TITLE}</SectionTitle>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              {C.WHO_TYPES.map((item) => (
+                <Card key={item.title} {...item} />
+              ))}
+            </div>
+
+            <p className="mt-8 text-[15px] leading-relaxed text-body sm:text-base">
+              {C.WHO_NOTE}
+            </p>
+          </div>
+
+          <div className="flex justify-center lg:justify-end">
+            <AppScreenMockup
+              variant="account-link"
+              className="w-[240px] sm:w-[272px]"
+            />
+          </div>
         </div>
       </Section>
 
