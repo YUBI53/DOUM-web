@@ -48,13 +48,15 @@ export interface CycleStep {
 /** 팀 프로토타입(preview.html)의 화면 이름을 그대로 쓴다. */
 export type AppScreenVariant =
   | 'requester-home'
-  | 'new-request'
+  | 'new-request-emergency'
   | 'request-detail'
   | 'helper-home'
   | 'activity'
   | 'log-new'
   | 'helper-payments'
-  | 'helper-care';
+  | 'helper-care'
+  | 'signup-role'
+  | 'account-link';
 
 export type IconName =
   | 'car'

@@ -50,7 +50,7 @@ export const HOW_STEPS: readonly StepItem[] = [
   {
     title: '어떤 도움이 필요한지 고르기',
     description: '도움 종류와 원하는 날짜·시간을 선택해요',
-    screen: 'new-request',
+    screen: 'new-request-emergency',
   },
   {
     title: '매니저가 시간을 맞춰요',

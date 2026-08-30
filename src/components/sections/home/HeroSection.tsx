@@ -36,6 +36,7 @@ export function HeroSection() {
             <AppScreenMockup
               variant="requester-home"
               tilt
+              priority
               className="w-[248px] sm:w-[280px]"
             />
           </div>

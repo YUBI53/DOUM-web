@@ -23,7 +23,7 @@ export function PhoneFrame({
         className="absolute left-1/2 top-4 z-10 h-4 w-20 -translate-x-1/2 rounded-pill bg-ink/90"
         aria-hidden
       />
-      <div className="relative aspect-[9/19] w-full overflow-hidden rounded-[1.75rem] bg-canvas-tint">
+      <div className="relative aspect-[393/893] w-full overflow-hidden rounded-[1.75rem] bg-canvas-tint">
         {children}
       </div>
     </div>

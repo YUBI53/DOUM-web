@@ -15,3 +15,6 @@ next-env.d.ts
 # 카카오톡으로 받은 원본 사진 (용량이 커서 저장소에 넣지 않는다)
 # 웹용으로 줄인 것은 public/team/ 에 있다
 KakaoTalk_*.jpg
+
+# 피그마 원본 zip (내려받은 것)
+figma-files.zip
