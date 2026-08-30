@@ -64,27 +64,6 @@ export default function ManagerPage() {
         </ul>
       </Section>
 
-      {/* C-3 지원 자격 */}
-      <Section space="md">
-        <SectionLabel>{C.REQUIREMENTS_LABEL}</SectionLabel>
-        <SectionTitle>{C.REQUIREMENTS_TITLE}</SectionTitle>
-
-        <ul className="mt-12 grid gap-4 sm:mt-14 md:grid-cols-3">
-          {C.REQUIREMENTS.map((item, i) => (
-            <li key={item}>
-              <Surface className="h-full p-7 sm:p-8">
-                <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-brand text-[15px] font-bold text-white">
-                  {i + 1}
-                </span>
-                <p className="mt-5 text-[17px] font-bold leading-[1.55] tracking-tight text-ink">
-                  {item}
-                </p>
-              </Surface>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
       {/* C-4 지원 절차 — 이 페이지에서 가장 큰 자리 */}
       <Section id="process" tone="tint" space="xl">
         <SectionLabel>{C.PROCESS_LABEL}</SectionLabel>
@@ -145,7 +124,7 @@ export default function ManagerPage() {
       <Section>
         <SectionLabel>{C.REGION_LABEL}</SectionLabel>
         <SectionTitle>{C.REGION_TITLE}</SectionTitle>
-        <p className="mt-4 text-[15px] leading-relaxed text-body sm:text-base">
+        <p className="mt-4 text-[16px] leading-relaxed text-body sm:text-[17px]">
           {C.REGION_NOTE}
         </p>
 

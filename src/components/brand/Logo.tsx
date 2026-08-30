@@ -1,10 +1,11 @@
 import { LogoMark } from './LogoMark';
 
+/** 프로토타입의 비율(마크 18 : 글자 21)을 따른다. */
 const SIZES = {
-  sm: { mark: 'h-5 w-5', word: 'text-lg' },
+  sm: { mark: 'h-[15px] w-[15px]', word: 'text-[17px]' },
   // GNB에서 쓴다. 옆 메뉴(15px)와 위계가 벌어지도록 크게 잡았다.
-  md: { mark: 'h-[26px] w-[26px]', word: 'text-[25px]' },
-  lg: { mark: 'h-8 w-8', word: 'text-3xl' },
+  md: { mark: 'h-[21px] w-[21px]', word: 'text-[25px]' },
+  lg: { mark: 'h-[27px] w-[27px]', word: 'text-[32px]' },
 } as const;
 
 /**
@@ -24,7 +25,7 @@ export function Logo({
     <span className={`inline-flex items-center gap-1.5 ${className}`}>
       <LogoMark className={`${s.mark} text-brand`} />
       <span
-        className={`${s.word} font-extrabold leading-none tracking-tighter text-ink`}
+        className={`${s.word} font-extrabold leading-none tracking-[-0.06em] text-ink`}
       >
         DOUM
       </span>

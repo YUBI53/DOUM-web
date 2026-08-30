@@ -41,21 +41,6 @@ export const WORK_NOTES = [
   '일정이 안 맞으면 다른 시간을 제안할 수 있어요',
 ] as const;
 
-// ─── C-3 지원 자격 ─────────────────────────────────────────────────────────
-
-export const REQUIREMENTS_LABEL = '지원 자격';
-export const REQUIREMENTS_TITLE = '이런 분을 찾고 있어요';
-
-/**
- * docs/웹기획안.md 232~235행 원문이다.
- * TODO(확인 필요): 기획안의 근거가 확인되지 않았다. 실제 모집 조건인지 다로리인 확인이 필요하다.
- */
-export const REQUIREMENTS = [
-  '청도군 읍·면에 살고 계신 분',
-  '주중에 몇 시간을 낼 수 있는 분',
-  '자차가 있으면 이동 돌봄까지 가능해요',
-] as const;
-
 // ─── C-4 지원 절차 ─────────────────────────────────────────────────────────
 
 export const PROCESS_LABEL = '지원 절차';
@@ -163,4 +148,5 @@ export const FAQ: readonly FaqItem[] = [
 // ─── 하단 CTA ──────────────────────────────────────────────────────────────
 
 export const CTA_TITLE = '마을에서 시작해보세요';
-export const CTA_DESCRIPTION = '앱에서 지금 지원할 수 있어요.';
+export const CTA_DESCRIPTION =
+  '지원서를 쓰고 교육을 마치면, 사는 곳 가까이에서 첫 활동을 시작해요.';

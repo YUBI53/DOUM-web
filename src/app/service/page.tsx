@@ -98,7 +98,7 @@ export default function ServicePage() {
               ))}
             </div>
 
-            <p className="mt-8 text-[15px] leading-relaxed text-body sm:text-base">
+            <p className="mt-8 text-[16px] leading-relaxed text-body sm:text-[17px]">
               {C.WHO_NOTE}
             </p>
           </div>
