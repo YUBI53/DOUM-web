@@ -1,17 +1,20 @@
 import Image from 'next/image';
 
 import { PhoneFrame } from './PhoneFrame';
-import { LogoMark } from '@/components/brand/LogoMark';
 import type { AppScreenVariant } from '@/lib/types';
 
 /**
  * 앱 화면 목업.
  *
- * TODO(placeholder): 앱 실화면 캡처가 아직 없어 화면을 코드로 그려두었다.
- * 캡처를 받으면 imageSrc만 넘기면 그대로 교체된다. 이 파일 밖은 손대지 않아도 된다.
- *   <AppScreenMockup variant="request-send" imageSrc="/app/request-send.png" />
+ * 팀에서 만든 실제 프로토타입(preview.html, 30개 화면)의 디자인 문법을 그대로 옮겼다.
+ * 영문 eyebrow → 굵은 2행 제목 → 얇은 행 목록 → 알약 배지, 그리고 하단 탭.
+ * 화면에 쓰인 이름·시간·금액도 프로토와 같은 값을 쓴다.
  *
- * 프레임 폭은 240~290px 사이를 전제로 글자 크기를 맞췄다.
+ * TODO(placeholder): 프로토가 최종 디자인이 되면 캡처로 교체한다.
+ * imageSrc만 넘기면 그대로 바뀐다.
+ *   <AppScreenMockup variant="new-request" imageSrc="/app/new-request.png" />
+ *
+ * 프레임 폭 240~290px를 전제로 글자 크기를 맞췄다.
  */
 export function AppScreenMockup({
   variant,
@@ -54,111 +57,176 @@ export function AppScreenMockup({
 
 // ─── 화면 조각 ─────────────────────────────────────────────────────────────
 
-function StatusBar() {
+/** 화면 위쪽 영문 라벨. 프로토가 전 화면에서 쓰는 방식이다. */
+function Eyebrow({ children }: { children: string }) {
   return (
-    <div className="flex items-center justify-between px-4 pb-1 pt-3.5 text-[8px] font-semibold text-ink">
-      <span>9:41</span>
-      <span className="flex items-center gap-1">
-        <span className="h-1.5 w-1.5 rounded-pill bg-ink/70" />
-        <span className="h-1.5 w-4 rounded-[2px] bg-ink/70" />
+    <p className="mb-1.5 text-[6.5px] font-bold uppercase tracking-[0.14em] text-[#9aa5a3]">
+      {children}
+    </p>
+  );
+}
+
+/** 굵은 2행 제목. */
+function Title({ lines }: { lines: readonly [string, string?] }) {
+  return (
+    <h3 className="text-[14px] font-extrabold leading-[1.32] tracking-[-0.03em] text-[#0d1a18]">
+      {lines[0]}
+      {lines[1] && (
+        <>
+          <br />
+          {lines[1]}
+        </>
+      )}
+    </h3>
+  );
+}
+
+function Sub({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mt-1.5 text-[7px] leading-[1.6] text-[#7c8a88]">{children}</p>
+  );
+}
+
+/** 오른쪽에 값이 붙는 얇은 행. */
+function Row({
+  label,
+  value,
+  strong,
+}: {
+  label: string;
+  value: string;
+  strong?: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-between border-b border-[#f0f3f2] py-[7px]">
+      <span className="text-[7.5px] text-[#8b9997]">{label}</span>
+      <span
+        className={`text-[7.5px] ${
+          strong ? 'font-bold text-[#0d1a18]' : 'font-medium text-[#26332f]'
+        }`}
+      >
+        {value}
       </span>
     </div>
   );
 }
 
-function AppBar({ title }: { title?: string }) {
-  return (
-    <div className="flex items-center gap-1.5 px-4 py-2.5">
-      {title ? (
-        <>
-          <span className="text-[11px] text-muted">←</span>
-          <span className="text-[11px] font-bold text-ink">{title}</span>
-        </>
-      ) : (
-        <>
-          <LogoMark className="h-3 w-3 text-brand" />
-          <span className="text-[11px] font-extrabold tracking-tighter text-ink">
-            DOUM
-          </span>
-        </>
-      )}
-    </div>
-  );
-}
+const PILL = {
+  brand: 'border-brand/40 bg-brand-weak text-[#00706b]',
+  plain: 'border-[#dfe5e4] bg-white text-[#5f6d6b]',
+  warn: 'border-[#f0d9a8] bg-warn text-warn-ink',
+} as const;
 
-function Chip({
+function Pill({
   children,
-  active,
+  tone = 'plain',
 }: {
-  children: React.ReactNode;
-  active?: boolean;
+  children: string;
+  tone?: keyof typeof PILL;
 }) {
   return (
     <span
-      className={`whitespace-nowrap rounded-pill px-2.5 py-1 text-[8px] font-semibold ${
-        active ? 'bg-brand text-white' : 'bg-chip text-body'
-      }`}
+      className={`shrink-0 rounded-pill border px-[5px] py-[1.5px] text-[6px] font-bold ${PILL[tone]}`}
     >
       {children}
     </span>
   );
 }
 
-function RequestRow({
+/** 요청·일정 한 줄. 제목 + 배지 / 아래 잔글씨. */
+function ListItem({
   title,
-  who,
   meta,
   badge,
-  isNew,
+  badgeTone,
+  tag,
 }: {
   title: string;
-  who: string;
   meta: string;
   badge?: string;
-  isNew?: boolean;
+  badgeTone?: keyof typeof PILL;
+  tag?: string;
 }) {
   return (
-    <div className="rounded-[10px] border border-line bg-white p-2.5 shadow-card">
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <p className="flex items-center gap-1 text-[9.5px] font-bold text-ink">
-            <span className="truncate">{title}</span>
-            {isNew && (
-              <span className="shrink-0 rounded-pill bg-brand px-1 py-px text-[6px] font-bold text-white">
-                NEW
-              </span>
-            )}
-          </p>
-          <p className="mt-1 truncate text-[7.5px] text-muted">{who}</p>
-          <p className="mt-0.5 truncate text-[7.5px] text-muted">{meta}</p>
-        </div>
-        {badge && (
-          <span className="shrink-0 rounded-pill bg-brand-weak px-1.5 py-0.5 text-[7px] font-bold text-[#00807a]">
-            {badge}
-          </span>
-        )}
+    <div className="flex items-start justify-between gap-2 border-b border-[#f0f3f2] py-2.5">
+      <div className="min-w-0">
+        <p className="flex items-center gap-1 text-[8.5px] font-bold text-[#0d1a18]">
+          <span className="truncate">{title}</span>
+          {tag && (
+            <span className="shrink-0 rounded-pill border border-[#dfe5e4] px-[4px] py-px text-[5.5px] font-semibold text-[#7c8a88]">
+              {tag}
+            </span>
+          )}
+        </p>
+        <p className="mt-[3px] truncate text-[6.5px] text-[#8b9997]">{meta}</p>
       </div>
+      {badge && <Pill tone={badgeTone}>{badge}</Pill>}
     </div>
   );
 }
 
-function PrimaryBar({ children }: { children: React.ReactNode }) {
+/** 섹션 제목 + 오른쪽 보조 링크. */
+function SectionHead({ title, aside }: { title: string; aside?: string }) {
   return (
-    <div className="mt-auto px-3.5 pb-4 pt-3">
-      <div className="flex h-8 items-center justify-center rounded-pill bg-brand text-[9.5px] font-bold text-white">
-        {children}
-      </div>
+    <div className="mb-1 mt-4 flex items-baseline justify-between">
+      <p className="text-[9.5px] font-extrabold tracking-[-0.02em] text-[#0d1a18]">
+        {title}
+      </p>
+      {aside && <span className="text-[6.5px] text-[#8b9997]">{aside}</span>}
     </div>
   );
 }
 
+/** 입력 칸. */
 function Field({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <p className="mb-1 text-[8px] font-semibold text-muted">{label}</p>
-      <div className="flex h-7 items-center rounded-[9px] border border-line bg-white px-2.5 text-[9px] font-medium text-ink">
+    <div className="mt-2.5">
+      <p className="mb-1 text-[6.5px] font-bold text-[#5f6d6b]">{label}</p>
+      <div className="flex h-[22px] items-center rounded-[7px] border border-[#e4eae9] px-2 text-[7.5px] font-medium text-[#26332f]">
         {value}
       </div>
+    </div>
+  );
+}
+
+/** 하단 탭. 프로토의 요청자 탭 구성을 따른다. */
+function TabBar({ active }: { active: string }) {
+  const tabs = ['내 요청', '이용 내역', '마이페이지', '알림'];
+  return (
+    <div className="mt-auto flex items-center justify-around border-t border-[#eef1f0] pb-2.5 pt-2">
+      {tabs.map((t) => (
+        <span
+          key={t}
+          className={`text-[6px] font-semibold ${
+            t === active ? 'text-brand' : 'text-[#a7b2b0]'
+          }`}
+        >
+          {t}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** 화면을 감싸는 껍데기. 프로토처럼 여백을 넉넉히 준다. */
+function Screen({
+  children,
+  tab,
+  back,
+}: {
+  children: React.ReactNode;
+  tab?: string;
+  back?: string;
+}) {
+  return (
+    <div className="flex h-full flex-col bg-white">
+      {back && (
+        <p className="px-4 pb-1 pt-4 text-[7px] text-[#8b9997]">← {back}</p>
+      )}
+      <div className={`flex-1 overflow-hidden px-4 ${back ? '' : 'pt-5'}`}>
+        {children}
+      </div>
+      {tab && <TabBar active={tab} />}
     </div>
   );
 }
@@ -166,253 +234,251 @@ function Field({ label, value }: { label: string; value: string }) {
 // ─── 화면별 구성 ───────────────────────────────────────────────────────────
 
 const SCREENS: Record<AppScreenVariant, React.ReactNode> = {
-  /** 홈 목록 — 키비주얼의 추천 도움 요청 화면 */
-  'request-list': (
-    <div className="flex h-full flex-col bg-white">
-      <StatusBar />
-      <AppBar />
-      <div className="px-4">
-        <p className="text-[12px] font-bold text-ink">안녕하세요, 민수님</p>
-        <p className="mt-0.5 flex items-center gap-0.5 text-[7.5px] text-muted">
-          경상북도 청도군 화양읍
+  /** requester-home — 요청자 홈 */
+  'requester-home': (
+    <Screen tab="내 요청">
+      <p className="text-[6.5px] text-[#8b9997]">경상북도 청도군 다로리</p>
+
+      <div className="mt-3 rounded-[10px] bg-canvas-tint px-3 py-3 text-center">
+        <p className="text-[8.5px] font-bold text-[#0d1a18]">
+          다음 매니저 방문 예정은
         </p>
-        <div className="mt-2.5 flex h-6 items-center rounded-pill bg-chip px-2.5 text-[8px] text-muted">
-          어떤 일이 있는지 찾아볼까요?
-        </div>
-        <div className="mt-2 flex gap-1 overflow-hidden">
-          <Chip active>전체</Chip>
-          <Chip>이동</Chip>
-          <Chip>일손</Chip>
-          <Chip>생활</Chip>
-        </div>
+        <p className="mt-0.5 text-[11px] font-extrabold text-[#0d1a18]">
+          08. 29 (토) 11:00
+        </p>
+        <p className="mt-1 text-[6.5px] text-[#8b9997]">
+          긴급 돌봄이 필요하신가요?
+        </p>
       </div>
-      <div className="mt-3 flex-1 space-y-1.5 overflow-hidden bg-canvas-tint px-3 pt-3">
-        <RequestRow
-          title="병원 진료 동행"
-          who="김복자 어르신"
-          meta="6월 4일 오전 9:00 · 1.0km"
-          badge="1/2명"
-          isNew
-        />
-        <RequestRow
-          title="마루 청소"
-          who="최분이 할머니"
-          meta="6월 2일 오전 9:00 · 600m"
-          badge="1/3명"
-        />
-        <RequestRow
-          title="시장 짐 들어주기"
-          who="강복현 어르신"
-          meta="6월 6일 오후 4:00 · 1.4km"
-        />
-      </div>
-    </div>
+
+      <SectionHead title="나의 요청" aside="더 보기 →" />
+      <ListItem
+        title="화·목 아이 픽업"
+        tag="정기"
+        meta="화양읍 00길 · 8월 25일 오전 11:00"
+        badge="검토 중"
+      />
+      <ListItem
+        title="월·수 등하원 동행"
+        tag="정기"
+        meta="화양읍 00길 · 8월 25일 오후 4:30"
+        badge="반려"
+        badgeTone="warn"
+      />
+      <ListItem
+        title="병원 진료 동행"
+        tag="긴급"
+        meta="화양읍 00길 · 9월 1일 오후 2:00"
+        badge="승인"
+        badgeTone="brand"
+      />
+    </Screen>
   ),
 
-  /** STEP 1 — 어떤 도움이 필요한지 고르기 */
-  'request-send': (
-    <div className="flex h-full flex-col bg-white">
-      <StatusBar />
-      <AppBar title="도움 요청" />
-      <div className="space-y-3 px-4 pt-1">
-        <div>
-          <p className="mb-1.5 text-[8px] font-semibold text-muted">도움 종류</p>
-          <div className="grid grid-cols-2 gap-1.5">
-            {[
-              ['병원·이동', true],
-              ['동행', false],
-              ['집안일', false],
-              ['식사 지원', false],
-            ].map(([label, active]) => (
-              <div
-                key={label as string}
-                className={`flex h-8 items-center justify-center rounded-[10px] text-[9px] font-semibold ${
-                  active
-                    ? 'border border-brand bg-brand-weak text-[#00807a]'
-                    : 'border border-line bg-white text-body'
-                }`}
-              >
-                {label as string}
-              </div>
-            ))}
-          </div>
-        </div>
-        <Field label="날짜" value="6월 4일 (화)" />
-        <Field label="시간" value="오전 9:00" />
-        <div>
-          <p className="mb-1 text-[8px] font-semibold text-muted">
-            남기고 싶은 말
-          </p>
-          <div className="h-11 rounded-[9px] border border-line bg-white px-2.5 py-1.5 text-[8px] leading-relaxed text-muted">
-            보건소까지만 태워주시면 됩니다
-          </div>
-        </div>
-      </div>
-      <PrimaryBar>요청 보내기</PrimaryBar>
-    </div>
-  ),
+  /** new-request — 새 요청 */
+  'new-request': (
+    <Screen back="내 요청">
+      <Eyebrow>NEW REQUEST</Eyebrow>
+      <Title lines={['어떤 도움이', '필요한가요?']} />
 
-  /** STEP 2 — 매니저가 시간을 맞춰요 */
-  'visit-confirm': (
-    <div className="flex h-full flex-col bg-white">
-      <StatusBar />
-      <AppBar title="시간 조율" />
-      <div className="space-y-2 px-4 pt-1">
-        <div className="rounded-[10px] border border-line bg-white p-2.5 shadow-card">
-          <p className="text-[8px] font-semibold text-muted">요청한 시간</p>
-          <p className="mt-1 text-[10px] font-bold text-ink line-through decoration-muted">
-            6월 4일 오전 9:00
-          </p>
-        </div>
-        <div className="rounded-[10px] border border-brand bg-brand-weak p-2.5">
-          <p className="text-[8px] font-semibold text-[#00807a]">
-            매니저가 제안한 시간
-          </p>
-          <p className="mt-1 text-[11px] font-bold text-ink">
-            6월 4일 오전 10:30
-          </p>
-          <p className="mt-1.5 text-[7.5px] leading-relaxed text-body">
-            앞 일정이 있어 조금 늦게 도착합니다
-          </p>
-        </div>
-        <div className="flex items-start gap-1.5 rounded-[10px] bg-warn p-2.5">
-          <span className="text-[9px] leading-none text-warn-ink">!</span>
-          <p className="text-[7.5px] font-medium leading-relaxed text-warn-ink">
-            &ldquo;이 시간에 꼭 가야 해요&rdquo;를 켜두면 시간은 바뀌지 않아요
-          </p>
-        </div>
-      </div>
-      <PrimaryBar>이 시간으로 확정</PrimaryBar>
-    </div>
-  ),
-
-  /** STEP 3 — 정해진 시간에 방문 */
-  'manager-assigned': (
-    <div className="flex h-full flex-col bg-white">
-      <StatusBar />
-      <AppBar title="방문 예정" />
-      <div className="space-y-2.5 px-4 pt-1">
-        <div className="rounded-[10px] border border-line bg-white p-3 shadow-card">
-          <div className="flex items-center gap-2">
-            <span className="h-7 w-7 rounded-pill bg-brand-weak" />
-            <div>
-              <p className="text-[10px] font-bold text-ink">이정미 매니저</p>
-              <p className="text-[7.5px] text-muted">화양읍 · 활동 중</p>
-            </div>
-          </div>
-          <div className="mt-2.5 flex items-center justify-between rounded-[8px] bg-canvas-tint px-2.5 py-2">
-            <span className="text-[8px] text-muted">방문 시간</span>
-            <span className="text-[9px] font-bold text-ink">
-              6월 4일 오전 10:30
-            </span>
-          </div>
-        </div>
-        <div className="relative h-24 overflow-hidden rounded-[10px] bg-canvas-tint">
-          <svg viewBox="0 0 200 100" className="h-full w-full">
-            <path
-              d="M-10 70 Q40 40 80 62 T210 40"
-              fill="none"
-              stroke="#EDEFF2"
-              strokeWidth="10"
-            />
-            <path
-              d="M20 -10 Q50 40 40 110"
-              fill="none"
-              stroke="#EDEFF2"
-              strokeWidth="8"
-            />
-            <circle cx="118" cy="52" r="16" fill="#00D5C8" opacity="0.14" />
-            <circle cx="118" cy="52" r="5" fill="#00D5C8" />
-          </svg>
-          <span className="absolute bottom-2 left-2 rounded-pill bg-white/90 px-2 py-0.5 text-[7px] font-semibold text-body">
-            도착까지 약 8분
-          </span>
-        </div>
-      </div>
-      <PrimaryBar>도착 확인하기</PrimaryBar>
-    </div>
-  ),
-
-  /** STEP 4 — 활동 기록 */
-  'activity-complete': (
-    <div className="flex h-full flex-col bg-white">
-      <StatusBar />
-      <AppBar title="활동일지" />
-      <div className="px-4 pt-1">
-        <div className="flex flex-col items-center rounded-[12px] bg-brand-weak px-3 py-3.5">
-          <span className="flex h-7 w-7 items-center justify-center rounded-pill bg-brand text-[11px] font-bold text-white">
-            ✓
-          </span>
-          <p className="mt-1.5 text-[10px] font-bold text-ink">활동 완료</p>
-          <p className="mt-0.5 text-[7.5px] text-body">6월 4일 · 1시간 20분</p>
-        </div>
-        <div className="mt-2.5 space-y-1.5">
-          <div className="flex items-center justify-between rounded-[9px] border border-line bg-white px-2.5 py-2">
-            <span className="text-[8px] text-muted">도착 시각</span>
-            <span className="text-[8.5px] font-semibold text-ink">
-              오전 10:28
-            </span>
-          </div>
-          <div className="flex items-center justify-between rounded-[9px] border border-line bg-white px-2.5 py-2">
-            <span className="text-[8px] text-muted">위치 확인</span>
-            <span className="text-[8.5px] font-semibold text-[#00807a]">
-              자동 기록됨
-            </span>
-          </div>
-        </div>
-        <div className="mt-2.5">
-          <p className="mb-1 text-[8px] font-semibold text-muted">활동 사진</p>
-          <div className="grid grid-cols-3 gap-1.5">
-            <span className="aspect-square rounded-[8px] bg-chip" />
-            <span className="aspect-square rounded-[8px] bg-chip" />
-            <span className="flex aspect-square items-center justify-center rounded-[8px] border border-dashed border-line text-[11px] text-muted">
-              +
-            </span>
-          </div>
-        </div>
-      </div>
-      <PrimaryBar>일지 제출</PrimaryBar>
-    </div>
-  ),
-
-  /** 활동비 정산 — 금액은 확정 전이라 비워 둔다 */
-  settlement: (
-    <div className="flex h-full flex-col bg-white">
-      <StatusBar />
-      <AppBar title="활동비" />
-      <div className="space-y-2.5 px-4 pt-1">
-        <div className="rounded-[12px] bg-ink p-3 text-white">
-          <p className="text-[8px] text-white/60">이번 달 정산 예정</p>
-          {/* TODO(placeholder): 활동비 단가 확정 전까지 금액을 쓰지 않는다. */}
-          <div className="mt-2 h-4 w-24 rounded-[4px] bg-white/20" />
-          <p className="mt-2 text-[7.5px] text-white/60">검토 완료 6건</p>
-        </div>
+      <p className="mb-1.5 mt-3.5 text-[6.5px] font-bold text-[#5f6d6b]">
+        돌봄 유형
+      </p>
+      <div className="grid grid-cols-2 gap-1.5">
         {[
-          ['병원 진료 동행', '6월 4일', '검토 완료'],
-          ['마루 청소', '6월 2일', '검토 완료'],
-          ['말벗', '6월 1일', '검토 중'],
-        ].map(([title, date, status]) => (
+          ['동행', true],
+          ['병원·이동 라이딩', false],
+          ['집안일 도움', false],
+          ['식사 지원', false],
+        ].map(([label, on]) => (
           <div
-            key={title}
-            className="flex items-center justify-between rounded-[10px] border border-line bg-white px-2.5 py-2 shadow-card"
+            key={label as string}
+            className={`flex h-[26px] items-center justify-center rounded-[8px] text-[7px] font-semibold ${
+              on
+                ? 'bg-brand-weak text-[#00706b]'
+                : 'border border-[#e4eae9] text-[#5f6d6b]'
+            }`}
           >
-            <div>
-              <p className="text-[9px] font-bold text-ink">{title}</p>
-              <p className="mt-0.5 text-[7.5px] text-muted">{date}</p>
-            </div>
-            <span
-              className={`rounded-pill px-1.5 py-0.5 text-[7px] font-bold ${
-                status === '검토 중'
-                  ? 'bg-warn text-warn-ink'
-                  : 'bg-brand-weak text-[#00807a]'
-              }`}
-            >
-              {status}
-            </span>
+            {label as string}
           </div>
         ))}
       </div>
-      <PrimaryBar>출금 신청</PrimaryBar>
-    </div>
+
+      <Field label="희망 날짜" value="2026. 09. 01 (화)" />
+      <Field label="희망 시간" value="오전 11:00" />
+
+      <div className="mt-2.5 flex items-center gap-1.5">
+        <span className="h-[7px] w-[7px] rounded-[2px] border border-[#c9d3d1]" />
+        <span className="text-[6.5px] text-[#5f6d6b]">
+          이 시간에 꼭 가야 해요
+        </span>
+      </div>
+    </Screen>
+  ),
+
+  /** request-detail — 요청 상세 */
+  'request-detail': (
+    <Screen back="내 요청">
+      <Eyebrow>REQUEST DETAIL</Eyebrow>
+      <div className="flex items-start justify-between gap-2">
+        <Title lines={['병원 진료 동행']} />
+        <Pill>접수됨</Pill>
+      </div>
+
+      <div className="mt-3">
+        <Row label="희망 일시" value="09. 01 (화) 14:00" />
+        <Row label="돌봄 유형" value="동행" />
+        <Row label="대상자" value="김아이 · 아동" />
+        <Row label="담당 매니저" value="이민지" strong />
+      </div>
+
+      <p className="mt-2.5 text-[7px] leading-relaxed text-[#5f6d6b]">
+        병원 진료 후 귀가 동행이 필요합니다.
+      </p>
+
+      <SectionHead title="메시지" />
+      <p className="text-[6.5px] text-[#8b9997]">아직 메시지가 없어요.</p>
+      <div className="mt-1.5 flex h-[20px] items-center rounded-[7px] border border-[#e4eae9] px-2 text-[6.5px] text-[#a7b2b0]">
+        메시지를 입력해 주세요
+      </div>
+    </Screen>
+  ),
+
+  /** helper-home — 매니저 홈 */
+  'helper-home': (
+    <Screen tab="마이페이지">
+      <p className="text-[11px] font-extrabold tracking-[-0.03em] text-[#0d1a18]">
+        안녕하세요, 김도움님
+      </p>
+
+      <SectionHead title="긴급 돌봄 요청" aside="1건" />
+      <ListItem
+        title="김아이 · 동행"
+        meta="09. 01 14:00 · 청도읍 · 꼭 해당 시간"
+        badge="확인"
+      />
+
+      <SectionHead title="오늘·다가오는 돌봄" aside="2건" />
+      <ListItem
+        title="오늘 11:00 · 김아이"
+        meta="화양읍 · 아이 픽업"
+        badge="예정"
+        badgeTone="brand"
+      />
+      <ListItem
+        title="내일 16:30 · 김어르신"
+        meta="청도읍 · 병원 동행"
+        badge="확정"
+      />
+
+      <SectionHead title="돌봄 관련 알림" aside="3건" />
+      <ListItem
+        title="정기 일정 변경 요청"
+        meta="김아이 · 수·금 11:00으로 변경 요청"
+        badge="확인"
+      />
+    </Screen>
+  ),
+
+  /** activity — 활동 인증 */
+  activity: (
+    <Screen back="배정 요청">
+      <Eyebrow>ACTIVITY</Eyebrow>
+      <Title lines={['활동 인증']} />
+      <Sub>김아이 · 09. 01 14:00 · 동행</Sub>
+
+      <div className="mt-4 space-y-2">
+        <div className="rounded-[10px] border border-[#e4eae9] p-2.5">
+          <div className="flex items-center justify-between">
+            <p className="text-[8px] font-bold text-[#0d1a18]">① 활동 시작</p>
+            <Pill>대기</Pill>
+          </div>
+          <p className="mt-1 text-[6.5px] text-[#8b9997]">
+            GPS 위치와 시작 시각을 기록해요.
+          </p>
+        </div>
+
+        <div className="rounded-[10px] border border-[#e4eae9] p-2.5 opacity-60">
+          <div className="flex items-center justify-between">
+            <p className="text-[8px] font-bold text-[#0d1a18]">② 활동 종료</p>
+            <Pill>잠김</Pill>
+          </div>
+          <p className="mt-1 text-[6.5px] text-[#8b9997]">
+            종료 후 활동일지를 작성해요.
+          </p>
+        </div>
+      </div>
+    </Screen>
+  ),
+
+  /** log-new — 활동일지 작성 */
+  'log-new': (
+    <Screen back="활동일지">
+      <Eyebrow>NEW LOG</Eyebrow>
+      <Title lines={['활동일지 작성']} />
+
+      <Field label="대상자" value="김아이" />
+      <Field label="활동 유형" value="일반" />
+      <Field label="활동 장소" value="청도읍" />
+
+      <div className="mt-2.5">
+        <p className="mb-1 text-[6.5px] font-bold text-[#5f6d6b]">활동 내용</p>
+        <div className="h-[34px] rounded-[7px] border border-[#e4eae9] px-2 py-1.5 text-[6.5px] leading-relaxed text-[#a7b2b0]">
+          활동 내용을 작성해 주세요
+        </div>
+      </div>
+
+      <p className="mt-3 text-[6px] leading-relaxed text-[#8b9997]">
+        제출 후 검토 대기 상태가 되며, 관리자 승인 후 활동비 정산에 반영돼요.
+      </p>
+    </Screen>
+  ),
+
+  /** helper-payments — 출금·정산 */
+  'helper-payments': (
+    <Screen tab="마이페이지">
+      <Eyebrow>PAYMENTS</Eyebrow>
+      <Title lines={['출금·정산']} />
+
+      <div className="mt-3.5">
+        <p className="text-[6.5px] text-[#8b9997]">출금 가능 잔액</p>
+        {/* 프로토와 같은 값. 실제 단가는 아직 확정 전이다. */}
+        <p className="mt-0.5 text-[17px] font-extrabold tracking-[-0.03em] text-[#0d1a18]">
+          ₩180,000
+        </p>
+      </div>
+
+      <div className="mt-3 flex h-[24px] items-center justify-center rounded-pill bg-brand text-[8px] font-bold text-[#04211f]">
+        출금 요청
+      </div>
+
+      <SectionHead title="월별 정산 내역" />
+      <ListItem title="2026년 8월" meta="활동 8건 · 승인" badge="₩240,000" />
+    </Screen>
+  ),
+
+  /** helper-care — 돌봄방 */
+  'helper-care': (
+    <Screen tab="마이페이지">
+      <Eyebrow>CARE ROOMS</Eyebrow>
+      <Title lines={['돌봄 관리']} />
+      <Sub>요청자별 돌봄방에서 일정, 돌봄 내용, 채팅, 활동일지를 관리해요.</Sub>
+
+      <div className="mt-3.5 space-y-2">
+        {[
+          ['김아이 돌봄방', '김하늘 요청자 · 아동', '화·목 아이 픽업 · 11:00 · 화양읍'],
+          ['김어르신 돌봄방', '박서연 요청자 · 어르신', '월·수 병원 동행 · 16:30 · 청도읍'],
+        ].map(([title, who, when]) => (
+          <div
+            key={title}
+            className="rounded-[10px] border border-[#e4eae9] p-2.5"
+          >
+            <p className="text-[8.5px] font-bold text-[#0d1a18]">{title}</p>
+            <p className="mt-[3px] text-[6.5px] text-[#8b9997]">{who}</p>
+            <p className="mt-[2px] text-[6.5px] text-[#8b9997]">{when}</p>
+          </div>
+        ))}
+      </div>
+    </Screen>
   ),
 };

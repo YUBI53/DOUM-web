@@ -134,7 +134,7 @@ export default function ManagerPage() {
 
           <div className="flex justify-center lg:justify-end">
             <AppScreenMockup
-              variant="settlement"
+              variant="helper-payments"
               className="w-[240px] sm:w-[272px]"
             />
           </div>

@@ -45,14 +45,16 @@ export interface CycleStep {
   lines: readonly [string, string];
 }
 
-/** 코드로 그린 앱 화면 목업의 종류. */
+/** 팀 프로토타입(preview.html)의 화면 이름을 그대로 쓴다. */
 export type AppScreenVariant =
-  | 'request-send'
-  | 'visit-confirm'
-  | 'activity-complete'
-  | 'request-list'
-  | 'manager-assigned'
-  | 'settlement';
+  | 'requester-home'
+  | 'new-request'
+  | 'request-detail'
+  | 'helper-home'
+  | 'activity'
+  | 'log-new'
+  | 'helper-payments'
+  | 'helper-care';
 
 export type IconName =
   | 'car'

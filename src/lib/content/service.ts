@@ -50,23 +50,23 @@ export const HOW_STEPS: readonly StepItem[] = [
   {
     title: '어떤 도움이 필요한지 고르기',
     description: '도움 종류와 원하는 날짜·시간을 선택해요',
-    screen: 'request-send',
+    screen: 'new-request',
   },
   {
     title: '매니저가 시간을 맞춰요',
     description:
       '시간이 어려우면 다른 시간을 제안하고, 이용자가 확정하면 정해져요',
-    screen: 'visit-confirm',
+    screen: 'request-detail',
   },
   {
     title: '정해진 시간에 방문',
     description: '매니저가 직접 찾아와 활동을 진행해요',
-    screen: 'manager-assigned',
+    screen: 'activity',
   },
   {
     title: '활동 기록',
     description: '오늘 무엇을 했는지 기록으로 남아요',
-    screen: 'activity-complete',
+    screen: 'log-new',
   },
 ] as const;
 

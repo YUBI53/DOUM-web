@@ -34,7 +34,7 @@ export function HeroSection() {
 
           <div className="flex justify-center lg:justify-end">
             <AppScreenMockup
-              variant="request-list"
+              variant="requester-home"
               tilt
               className="w-[248px] sm:w-[280px]"
             />
