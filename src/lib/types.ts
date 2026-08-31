@@ -56,7 +56,8 @@ export type AppScreenVariant =
   | 'helper-payments'
   | 'helper-care'
   | 'signup-role'
-  | 'account-link';
+  | 'account-link'
+  | 'schedule-detail';
 
 export type IconName =
   | 'car'

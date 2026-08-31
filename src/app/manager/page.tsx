@@ -33,7 +33,7 @@ export default function ManagerPage() {
         subline={C.HERO_SUBLINE}
         actions={
           <>
-            <Button href={APP_APPLY_URL} size="lg">
+            <Button href={APP_APPLY_URL} size="lg" external>
               지원하기
             </Button>
             <Button href="#process" variant="secondary" size="lg">
@@ -54,14 +54,28 @@ export default function ManagerPage() {
           ))}
         </div>
 
-        <ul className="mt-8 space-y-3">
-          {C.WORK_NOTES.map((note) => (
-            <li key={note} className="flex items-start gap-3 text-[15px] text-body">
-              <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-              {note}
-            </li>
-          ))}
-        </ul>
+        <div className="mt-12 grid items-center gap-12 lg:mt-16 lg:grid-cols-[1fr_280px] lg:gap-16">
+          <ul className="space-y-3">
+            {C.WORK_NOTES.map((note) => (
+              <li
+                key={note}
+                className="flex items-start gap-3 text-[16px] leading-relaxed text-body sm:text-[17px]"
+              >
+                <Icon name="check" className="mt-1 h-5 w-5 shrink-0 text-brand" />
+                {note}
+              </li>
+            ))}
+          </ul>
+
+          {/* 매니저가 앱에서 무엇을 보는지 */}
+          <div className="flex justify-center lg:justify-end">
+            <AppScreenMockup
+              variant="helper-home"
+              caption="오늘 갈 곳과 알림이 한눈에 보여요"
+              className="w-[240px] sm:w-[272px]"
+            />
+          </div>
+        </div>
       </Section>
 
       {/* C-4 지원 절차 — 이 페이지에서 가장 큰 자리 */}
@@ -151,7 +165,7 @@ export default function ManagerPage() {
             {C.CTA_DESCRIPTION}
           </p>
           <div className="mt-10 flex justify-center">
-            <Button href={APP_APPLY_URL} size="lg">
+            <Button href={APP_APPLY_URL} size="lg" external>
               지원하기
             </Button>
           </div>

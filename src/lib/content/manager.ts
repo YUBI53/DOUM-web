@@ -71,13 +71,14 @@ export const PROCESS_STEPS: readonly StepItem[] = [
 ] as const;
 
 /**
- * 5단계 STEP과 앱의 실제 상태값(applied → trained → active)을 겹쳐 보여준다.
+ * 다섯 단계가 앱에서 어떤 상태로 남는지 겹쳐 보여준다.
+ * 앱 내부 값은 applied / trained / active 지만, 화면에는 한글로만 쓴다.
  * span은 STEP 인덱스 기준 [시작, 끝]이며 0-based로 닫힌 구간이다.
  */
 export const PROCESS_STATUS_ZONES = [
-  { status: 'applied', span: [0, 1] },
-  { status: 'trained', span: [2, 3] },
-  { status: 'active', span: [4, 4] },
+  { status: '지원 접수', span: [0, 1] },
+  { status: '교육 이수', span: [2, 3] },
+  { status: '활동 가능', span: [4, 4] },
 ] as const;
 
 // ─── C-5 활동비 ────────────────────────────────────────────────────────────

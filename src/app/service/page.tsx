@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 import { StepFlow } from '@/components/diagrams/StepFlow';
-import { AdminDashboardMockup } from '@/components/mockups/AdminDashboardMockup';
 import { AppScreenMockup } from '@/components/mockups/AppScreenMockup';
 import { PageHero } from '@/components/sections/PageHero';
 import { Badge } from '@/components/ui/Badge';
@@ -31,7 +30,7 @@ export default function ServicePage() {
         title={C.HERO_TITLE}
         subline={C.HERO_SUBLINE}
         actions={
-          <Button href={APP_LOGIN_URL} size="lg">
+          <Button href={APP_LOGIN_URL} size="lg" external>
             DEMO
           </Button>
         }
@@ -54,7 +53,8 @@ export default function ServicePage() {
         <SectionLabel>{C.MODE_LABEL}</SectionLabel>
         <SectionTitle>{C.MODE_TITLE}</SectionTitle>
 
-        <div className="mt-12 grid gap-5 sm:mt-14 lg:grid-cols-2">
+        <div className="mt-12 grid items-start gap-10 lg:mt-14 lg:grid-cols-[1fr_280px] lg:gap-16">
+          <div className="grid gap-5">
           {C.MODES.map((mode) => (
             <Surface key={mode.tag} className="p-8 sm:p-10">
               <Badge tone={mode.tag === '정기' ? 'brand' : 'warn'}>
@@ -82,6 +82,16 @@ export default function ServicePage() {
               </ul>
             </Surface>
           ))}
+          </div>
+
+          {/* 정기 일정이 앱에서 어떻게 보이는지 */}
+          <div className="hidden justify-center lg:flex">
+            <AppScreenMockup
+              variant="schedule-detail"
+              caption="정해둔 일정은 앱에서 이렇게 이어져요"
+              className="w-[272px]"
+            />
+          </div>
         </div>
       </Section>
 
@@ -156,21 +166,20 @@ export default function ServicePage() {
         <SectionLabel>{C.OPERATION_LABEL}</SectionLabel>
         <SectionTitle>{C.OPERATION_TITLE}</SectionTitle>
 
-        <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-          {C.OPERATION_POINTS.map((point) => (
-            <li
-              key={point}
-              className="flex items-center gap-2 text-[15px] text-body"
-            >
-              <span className="h-1.5 w-1.5 rounded-pill bg-brand" aria-hidden />
-              {point}
+        <ul className="mt-12 grid gap-4 sm:mt-14 lg:grid-cols-3">
+          {C.OPERATION_POINTS.map((point, i) => (
+            <li key={point}>
+              <Surface className="h-full p-7 sm:p-8">
+                <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-brand-weak text-[15px] font-bold text-[#00706b]">
+                  {i + 1}
+                </span>
+                <p className="mt-5 text-[16px] font-semibold leading-relaxed text-ink sm:text-[17px]">
+                  {point}
+                </p>
+              </Surface>
             </li>
           ))}
         </ul>
-
-        <div className="mt-12">
-          <AdminDashboardMockup />
-        </div>
       </Section>
     </>
   );

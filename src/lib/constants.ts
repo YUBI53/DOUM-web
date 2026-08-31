@@ -17,15 +17,24 @@ export const SITE_URL =
 // ─── 앱 연결 ───────────────────────────────────────────────────────────────
 // 웹의 모든 입력·처리는 앱으로 넘긴다. 웹에서 폼을 자체 구현하지 않는다.
 
-/** TODO(placeholder): 앱 배포 URL 미정. 확정되면 env 또는 이 기본값을 교체한다. */
-export const APP_BASE_URL =
-  process.env.NEXT_PUBLIC_APP_BASE_URL ?? 'https://app.doum.example.com';
+/**
+ * 앱이 아직 배포되지 않아, 팀이 만든 프로토타입을 사이트 안에 함께 두고 그리로 보낸다.
+ * public/prototype/index.html 이 그 파일이다.
+ *
+ * TODO(placeholder): 앱이 배포되면 NEXT_PUBLIC_APP_BASE_URL만 지정하면
+ * 아래 두 주소가 실제 앱을 가리킨다.
+ */
+export const APP_BASE_URL = process.env.NEXT_PUBLIC_APP_BASE_URL ?? '';
 
-/** GNB의 DEMO, SERVICE 하단 CTA. 데모 계정 바로가기가 있는 로그인 화면. */
-export const APP_LOGIN_URL = `${APP_BASE_URL}/login`;
+/** GNB의 DEMO, SERVICE 하단 CTA. */
+export const APP_LOGIN_URL = APP_BASE_URL
+  ? `${APP_BASE_URL}/login`
+  : '/prototype/index.html';
 
-/** 홈 히어로 CTA 2, 돌봄매니저 히어로·하단 CTA. 돌봄매니저 지원서. */
-export const APP_APPLY_URL = `${APP_BASE_URL}/apply`;
+/** 돌봄매니저 히어로·하단 CTA. 지원서. */
+export const APP_APPLY_URL = APP_BASE_URL
+  ? `${APP_BASE_URL}/apply`
+  : '/prototype/index.html';
 
 // ─── 사업·파트너 ───────────────────────────────────────────────────────────
 
