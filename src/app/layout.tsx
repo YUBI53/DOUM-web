@@ -4,6 +4,7 @@ import './globals.css';
 import { pretendard } from './fonts';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { ScrollAnimator } from '@/components/motion/ScrollAnimator';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
 const DESCRIPTION =
@@ -49,6 +50,7 @@ export default function RootLayout({
         <div id="top" />
         <Header />
         <main id="main">{children}</main>
+        <ScrollAnimator />
         <Footer />
       </body>
     </html>

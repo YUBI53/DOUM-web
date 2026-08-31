@@ -49,8 +49,10 @@ export default function ManagerPage() {
         <SectionTitle>{C.WORK_TITLE}</SectionTitle>
 
         <div className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
-          {C.WORK_TYPES.map((item) => (
-            <Card key={item.title} {...item} />
+          {C.WORK_TYPES.map((item, i) => (
+            <div key={item.title} data-animate data-delay={String(Math.min(i + 2, 5))}>
+              <Card {...item} className="h-full" />
+            </div>
           ))}
         </div>
 
@@ -103,6 +105,8 @@ export default function ManagerPage() {
               {C.PAY_FLOW.map((step, i) => (
                 <li
                   key={step.title}
+                  data-animate
+                  data-delay={String(Math.min(i + 1, 5))}
                   className="flex items-center gap-4 rounded-card border border-line bg-white px-5 py-4 shadow-card"
                 >
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-pill bg-brand-weak text-[13px] font-bold text-[#00706b]">

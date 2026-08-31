@@ -8,12 +8,14 @@ import type { IconName } from '@/lib/types';
 export function Surface({
   children,
   className = '',
+  ...rest
 }: {
   children: React.ReactNode;
   className?: string;
-}) {
+} & React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
+      {...rest}
       className={`rounded-card-lg border border-line bg-white shadow-card ${className}`}
     >
       {children}

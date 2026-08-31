@@ -24,6 +24,7 @@ export function StepFlow({
         {steps.map((step, i) => (
           <li
             key={step.title}
+            data-animate
             className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
           >
             {/*
@@ -74,6 +75,8 @@ export function StepFlow({
       {steps.map((step, i) => (
         <li
           key={step.title}
+          data-animate
+          data-delay={String(Math.min(i + 1, 5))}
           className="relative rounded-card-lg border border-line bg-white p-6 shadow-card"
         >
           <StepNumber n={i + 1} />

@@ -1,7 +1,18 @@
 /** 섹션 머리의 `/ 라벨` 표기. */
-export function SectionLabel({ children }: { children: string }) {
+export function SectionLabel({
+  children,
+  delay,
+}: {
+  children: string;
+  /** 스크롤 등장 순서 */
+  delay?: string;
+}) {
   return (
-    <p className="mb-5 text-sm font-semibold tracking-tight text-muted">
+    <p
+      data-animate
+      data-delay={delay}
+      className="mb-5 text-sm font-semibold tracking-tight text-muted"
+    >
       <span className="mr-1.5 text-brand">/</span>
       {children}
     </p>
@@ -16,13 +27,17 @@ export function SectionTitle({
   children,
   accentLine,
   className = '',
+  delay = '1',
 }: {
   children: React.ReactNode;
   accentLine?: string;
   className?: string;
+  delay?: string;
 }) {
   return (
     <h2
+      data-animate
+      data-delay={delay}
       className={`text-[26px] font-bold leading-[1.35] tracking-tighter text-ink sm:text-[32px] lg:text-[38px] ${className}`}
     >
       {children}
@@ -40,12 +55,16 @@ export function SectionTitle({
 export function SectionLead({
   children,
   className = '',
+  delay = '2',
 }: {
   children: React.ReactNode;
   className?: string;
+  delay?: string;
 }) {
   return (
     <p
+      data-animate
+      data-delay={delay}
       className={`mt-4 text-[15px] leading-relaxed text-body sm:text-base ${className}`}
     >
       {children}

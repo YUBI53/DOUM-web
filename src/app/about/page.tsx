@@ -32,9 +32,11 @@ export default function AboutPage() {
         </SectionTitle>
 
         <div className="mt-12 max-w-3xl space-y-7 sm:mt-14">
-          {C.TEAM_PARAGRAPHS.map((lines) => (
+          {C.TEAM_PARAGRAPHS.map((lines, i) => (
             <p
               key={lines[0]}
+              data-animate
+              data-delay={String(Math.min(i + 2, 5))}
               className="text-[16px] leading-[1.85] text-body sm:text-[17px]"
             >
               {/* 넓은 화면에서는 적어둔 대로 끊고, 좁으면 자연스럽게 흐르게 둔다 */}
@@ -74,7 +76,7 @@ export default function AboutPage() {
 
           <div className="mt-12 grid gap-8 sm:mt-14 sm:grid-cols-2 lg:gap-10">
             {C.PARTNERS.map((partner) => (
-              <Surface key={partner.name} className="p-8 sm:p-10">
+              <Surface key={partner.name} data-animate className="p-8 sm:p-10">
                 <Badge tone="neutral">{partner.role}</Badge>
                 <h3 className="mt-5 text-[19px] font-bold tracking-tight text-ink sm:text-xl">
                   {partner.name}

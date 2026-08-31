@@ -42,8 +42,10 @@ export default function ServicePage() {
         <SectionTitle>{C.HELP_TYPES_TITLE}</SectionTitle>
 
         <div className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
-          {C.HELP_TYPES.map((item) => (
-            <Card key={item.title} {...item} />
+          {C.HELP_TYPES.map((item, i) => (
+            <div key={item.title} data-animate data-delay={String(Math.min(i + 2, 5))}>
+              <Card {...item} className="h-full" />
+            </div>
           ))}
         </div>
       </Section>
@@ -56,7 +58,7 @@ export default function ServicePage() {
         <div className="mt-12 grid items-start gap-10 lg:mt-14 lg:grid-cols-[1fr_280px] lg:gap-16">
           <div className="grid gap-5">
           {C.MODES.map((mode) => (
-            <Surface key={mode.tag} className="p-8 sm:p-10">
+            <Surface key={mode.tag} data-animate className="p-8 sm:p-10">
               <Badge tone={mode.tag === '정기' ? 'brand' : 'warn'}>
                 {mode.tag}
               </Badge>
@@ -103,8 +105,10 @@ export default function ServicePage() {
             <SectionTitle>{C.WHO_TITLE}</SectionTitle>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              {C.WHO_TYPES.map((item) => (
-                <Card key={item.title} {...item} />
+              {C.WHO_TYPES.map((item, i) => (
+                <div key={item.title} data-animate data-delay={String(i + 2)}>
+                  <Card {...item} className="h-full" />
+                </div>
               ))}
             </div>
 
@@ -144,7 +148,7 @@ export default function ServicePage() {
 
         <div className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2">
           {C.RECORD_POINTS.map((item) => (
-            <Surface key={item.title} className="flex gap-5 p-7 sm:p-8">
+            <Surface key={item.title} data-animate className="flex gap-5 p-7 sm:p-8">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill bg-brand-weak text-brand">
                 <Icon name={item.icon} className="h-5 w-5" />
               </span>
@@ -169,7 +173,7 @@ export default function ServicePage() {
         <ul className="mt-12 grid gap-4 sm:mt-14 lg:grid-cols-3">
           {C.OPERATION_POINTS.map((point, i) => (
             <li key={point}>
-              <Surface className="h-full p-7 sm:p-8">
+              <Surface data-animate data-delay={String(i + 2)} className="h-full p-7 sm:p-8">
                 <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-brand-weak text-[15px] font-bold text-[#00706b]">
                   {i + 1}
                 </span>

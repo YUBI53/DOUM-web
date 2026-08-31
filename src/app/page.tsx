@@ -1,3 +1,4 @@
+import { ClosingBandSection } from '@/components/sections/home/ClosingBandSection';
 import { CycleSection } from '@/components/sections/home/CycleSection';
 import { DailyMomentsSection } from '@/components/sections/home/DailyMomentsSection';
 import { HeroSection } from '@/components/sections/home/HeroSection';
@@ -11,6 +12,7 @@ export default function HomePage() {
       <OverviewSection />
       <DailyMomentsSection />
       <CycleSection />
+      <ClosingBandSection />
       <PreviewSection />
     </>
   );
