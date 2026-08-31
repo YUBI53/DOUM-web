@@ -55,6 +55,10 @@ export default function RootLayout({
         <Header />
         <main id="main">{children}</main>
         <ScrollAnimator />
+        {/* 스크립트가 막힌 환경에서도 글이 보이게 하는 안전장치. */}
+        <noscript>
+          <style>{`[data-animate]{opacity:1 !important}`}</style>
+        </noscript>
         <Footer />
       </body>
     </html>

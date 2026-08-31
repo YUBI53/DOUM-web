@@ -14,12 +14,6 @@ export function useInView<T extends HTMLElement>(rootMargin = '-15% 0px') {
     const el = ref.current;
     if (!el) return;
 
-    // 모션을 줄이도록 설정한 사용자에게는 애니메이션 없이 바로 보여준다.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setInView(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

@@ -14,6 +14,10 @@ import { useEffect } from 'react';
  * 전환은 "이전 상태가 그려져 있어야" 도는데, 그 조건이 언제 깨지는지
  * 확실히 잡히지 않아 재생을 명령하는 쪽으로 바꿨다.
  * 이 방식은 CSS 우선순위나 첫 렌더 시점에 영향을 받지 않는다.
+ *
+ * 운영체제의 '모션 줄이기' 설정은 보지 않는다.
+ * 그 설정이 켜진 컴퓨터에서는 화면이 멈춘 것처럼 보이는데,
+ * 발표·심사 자리에서 어떤 컴퓨터를 쓸지 알 수 없어 항상 재생하기로 했다.
  */
 const DURATION = 700;
 const EASING = 'cubic-bezier(0.16, 1, 0.3, 1)';
@@ -29,11 +33,11 @@ export function ScrollAnimator() {
 
     if (targets.length === 0) return;
 
-    const reveal = (el: HTMLElement, animate: boolean) => {
+    const reveal = (el: HTMLElement) => {
       el.dataset.animated = 'done';
       el.style.opacity = '1';
       el.style.transform = 'none';
-      if (!animate || typeof el.animate !== 'function') return;
+      if (typeof el.animate !== 'function') return;
 
       const step = Number(el.dataset.delay ?? 0);
       el.animate(
@@ -50,18 +54,11 @@ export function ScrollAnimator() {
       );
     };
 
-    // 모션을 줄이도록 설정한 사용자에게는 움직임 없이 바로 보여준다.
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
-      targets.forEach((el) => reveal(el, false));
-      return;
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          reveal(entry.target as HTMLElement, true);
+          reveal(entry.target as HTMLElement);
           observer.unobserve(entry.target);
         });
       },
