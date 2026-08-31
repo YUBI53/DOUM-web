@@ -4,7 +4,6 @@ import { Logo } from '@/components/brand/Logo';
 import { Container } from '@/components/ui/Container';
 import {
   APP_LOGIN_URL,
-  CONTACT_EMAIL,
   NAV_ITEMS,
   PARTNER_NAME,
   PROGRAM_NAME,
@@ -28,15 +27,6 @@ export function Footer() {
               {PARTNER_NAME} 연계
             </p>
 
-            <p className="mt-6 text-sm text-muted">
-              문의{' '}
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="font-medium text-body underline-offset-4 hover:text-brand hover:underline"
-              >
-                {CONTACT_EMAIL}
-              </a>
-            </p>
           </div>
 
           <nav aria-label="푸터 메뉴">

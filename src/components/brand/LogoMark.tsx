@@ -1,13 +1,13 @@
 /**
  * DOUM 로고 마크.
  *
- * 앱 프로토타입이 쓰는 것과 같은 모양이다. 프로토는 CSS 도형으로 만든다.
- *   width:18px; height:18px; background:#59cfcc;
- *   border-radius: 50% 50% 50% 0;
- *   transform: rotate(-45deg);
+ * 피그마 디자인 기준이다. 프로토타입 HTML은 CSS 도형으로 만든 지도 핀 모양이지만
+ * 실제 디자인은 동그란 몸통 오른쪽에 작은 부리 같은 꼬리가 붙은 형태다.
+ * public/app/ 의 내보내기 화면 왼쪽 위에서 확인할 수 있다.
  *
- * 세 모서리는 둥글고 한 모서리만 각진 물방울인데, -45도로 돌려
- * 각진 꼭짓점이 아래를 향한다. 여기서도 같은 방식으로 그린다.
+ * TODO(placeholder): 피그마에서 로고를 SVG로 내보내 받으면 이 path만 교체한다.
+ * 지금 것은 내보내기 화면을 보고 맞춘 근사치다.
+ * 쓰는 곳은 전부 Logo를 거치므로 다른 파일은 손대지 않아도 된다.
  */
 export function LogoMark({
   className,
@@ -17,11 +17,18 @@ export function LogoMark({
   title?: string;
 }) {
   return (
-    <span
-      className={`inline-block shrink-0 rotate-[-45deg] rounded-[50%_50%_50%_0] bg-current ${className ?? ''}`}
-      role={title ? 'img' : undefined}
+    <svg
+      viewBox="0 0 40 40"
+      className={className}
+      role={title ? 'img' : 'presentation'}
       aria-label={title}
       aria-hidden={title ? undefined : true}
-    />
+    >
+      <path
+        transform="rotate(-20 19 20)"
+        fill="currentColor"
+        d="M30.6 14A14.6 14.6 0 1 0 25.8 30.4C28.8 31.4 32.6 30.4 36.2 27.6C37.6 26.5 37.2 25.6 35.6 25.2C32.2 24.3 30.2 21.8 30.4 18.4Z"
+      />
+    </svg>
   );
 }

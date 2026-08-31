@@ -49,8 +49,12 @@ export const SHOW_PARTNER_LOGOS = false;
 
 // ─── 연락처 ────────────────────────────────────────────────────────────────
 
-/** TODO(placeholder): 문의 메일 주소 미정. */
-export const CONTACT_EMAIL = 'hello@example.com';
+/**
+ * TODO(placeholder): 문의 메일 주소 미정.
+ * 가짜 주소를 내보내지 않으려고 지금은 화면 어디에도 쓰지 않는다.
+ * 실제 주소가 정해지면 여기에 넣고 푸터에 문의 줄을 되살린다.
+ */
+export const CONTACT_EMAIL = '';
 
 // ─── 돌봄매니저 ────────────────────────────────────────────────────────────
 

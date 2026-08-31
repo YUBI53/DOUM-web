@@ -42,11 +42,11 @@ export async function renderOgImage({
       >
         {/* 로고 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <svg width="36" height="36" viewBox="0 0 40 40">
+          <svg width="38" height="38" viewBox="0 0 40 40">
             <path
-              transform="rotate(-45 20 20)"
+              transform="rotate(-20 19 20)"
               fill="#00D5C8"
-              d="M6 34V20A14 14 0 0 1 20 6a14 14 0 0 1 14 14 14 14 0 0 1-14 14Z"
+              d="M30.6 14A14.6 14.6 0 1 0 25.8 30.4C28.8 31.4 32.6 30.4 36.2 27.6C37.6 26.5 37.2 25.6 35.6 25.2C32.2 24.3 30.2 21.8 30.4 18.4Z"
             />
           </svg>
           <span

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 import { Container } from '@/components/ui/Container';
-import { CONTACT_EMAIL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: '개인정보처리방침',
@@ -20,15 +19,7 @@ export default function PrivacyPage() {
           개인정보처리방침
         </h1>
         <p className="mt-6 text-[15px] leading-relaxed text-body sm:text-base">
-          개인정보처리방침을 준비하고 있어요. 궁금한 점은 아래 메일로 연락 주세요.
-        </p>
-        <p className="mt-6">
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="text-[15px] font-semibold text-brand underline-offset-4 hover:underline"
-          >
-            {CONTACT_EMAIL}
-          </a>
+          개인정보처리방침을 준비하고 있어요. 정리되는 대로 이곳에 올리겠습니다.
         </p>
       </div>
     </Container>
