@@ -41,6 +41,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.variable}>
       <body className="font-sans">
+        <noscript>
+          {/* 스크립트가 없으면 등장 효과 없이 그냥 보이게 둔다 */}
+          <style>{'[data-animate]{opacity:1;transform:none}'}</style>
+        </noscript>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-pill focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
