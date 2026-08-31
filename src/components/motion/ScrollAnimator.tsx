@@ -15,6 +15,8 @@ import { useEffect } from 'react';
  * 확실히 잡히지 않아 재생을 명령하는 쪽으로 바꿨다.
  * 이 방식은 CSS 우선순위나 첫 렌더 시점에 영향을 받지 않는다.
  *
+ * 재생은 홈에서만 한다. 나머지 페이지는 시작 상태만 풀어 바로 보여준다.
+ *
  * 운영체제의 '모션 줄이기' 설정은 보지 않는다.
  * 그 설정이 켜진 컴퓨터에서는 화면이 멈춘 것처럼 보이는데,
  * 발표·심사 자리에서 어떤 컴퓨터를 쓸지 알 수 없어 항상 재생하기로 했다.
@@ -33,11 +35,11 @@ export function ScrollAnimator() {
 
     if (targets.length === 0) return;
 
-    const reveal = (el: HTMLElement) => {
+    const reveal = (el: HTMLElement, play: boolean) => {
       el.dataset.animated = 'done';
       el.style.opacity = '1';
       el.style.transform = 'none';
-      if (typeof el.animate !== 'function') return;
+      if (!play || typeof el.animate !== 'function') return;
 
       const step = Number(el.dataset.delay ?? 0);
       el.animate(
@@ -54,11 +56,17 @@ export function ScrollAnimator() {
       );
     };
 
+    // 홈이 아니면 애니메이션 없이 바로 보여준다.
+    if (pathname !== '/') {
+      targets.forEach((el) => reveal(el, false));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          reveal(entry.target as HTMLElement);
+          reveal(entry.target as HTMLElement, true);
           observer.unobserve(entry.target);
         });
       },
