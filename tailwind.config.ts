@@ -73,9 +73,19 @@ const config: Config = {
         content: '1180px',
       },
       keyframes: {
+        /**
+         * 스크롤 등장. 값은 감이 아니라 통용되는 권장치를 따랐다.
+         *   이동 20~30px / 재생 400~700ms / GPU가 처리하는 transform·opacity만
+         * blur 같은 필터는 쓰지 않는다. 매 프레임 다시 계산해 버벅인다.
+         */
         'fade-up': {
-          from: { opacity: '0', transform: 'translateY(16px)' },
+          from: { opacity: '0', transform: 'translateY(24px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        /** 폰이나 그림처럼 큰 것. 살짝 작게 시작해 제자리를 찾는다. */
+        rise: {
+          from: { opacity: '0', transform: 'translateY(30px) scale(0.97)' },
+          to: { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
         /** 히어로의 폰이 아주 느리게 떠 있는 정도. 눈에 띄면 과하다. */
         float: {
@@ -84,7 +94,9 @@ const config: Config = {
         },
       },
       animation: {
-        'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
+        // 강한 ease-out. 빠르게 들어와 부드럽게 멈춘다.
+        'fade-up': 'fade-up 0.62s cubic-bezier(0.16, 1, 0.3, 1) both',
+        rise: 'rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both',
         float: 'float 6s ease-in-out infinite',
       },
     },

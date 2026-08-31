@@ -43,15 +43,15 @@ export function HeroSection() {
 
             <p
               className="mt-7 animate-fade-up text-[19px] font-[450] leading-relaxed text-body sm:text-[21px]"
-              style={{ animationDelay: '480ms' }}
+              style={{ animationDelay: '430ms' }}
             >
               {HERO_SUBLINE}
             </p>
           </div>
 
           <div
-            className="flex animate-fade-up justify-center lg:justify-center"
-            style={{ animationDelay: '300ms' }}
+            className="flex animate-rise justify-center lg:justify-center"
+            style={{ animationDelay: '260ms' }}
           >
             <div className="relative">
               <AppScreenMockup
@@ -67,14 +67,14 @@ export function HeroSection() {
                 tag="정기"
                 text="화·목 아이 픽업"
                 className="-left-16 top-[6%] sm:-left-32"
-                delay={780}
+                delay={700}
               />
               <FloatingTag
                 tone="accent"
                 tag="긴급"
                 text="병원 진료 동행"
                 className="-right-14 top-[70%] sm:-right-28"
-                delay={940}
+                delay={840}
               />
             </div>
           </div>

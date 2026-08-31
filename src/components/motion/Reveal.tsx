@@ -14,20 +14,25 @@ export function Reveal({
   step = 0,
   className = '',
   as: Tag = 'div',
+  variant = 'fade-up',
 }: {
   children: React.ReactNode;
-  /** 0, 1, 2… 순서. 한 칸에 80ms씩 늦춘다. */
+  /** 0, 1, 2… 순서. 한 칸에 140ms씩 늦춘다. 200ms를 넘기면 연출한 티가 난다. */
   step?: number;
   className?: string;
   as?: 'div' | 'li' | 'section';
+  /** 폰·그림처럼 큰 것은 rise를 쓴다. */
+  variant?: 'fade-up' | 'rise';
 }) {
-  const { ref, inView } = useInView<HTMLDivElement>('-8% 0px');
+  const { ref, inView } = useInView<HTMLDivElement>('0px 0px -12% 0px');
 
   return (
     <Tag
       ref={ref as React.Ref<never>}
-      className={`${inView ? 'animate-fade-up' : 'opacity-0'} ${className}`}
-      style={{ animationDelay: `${step * 80}ms` }}
+      className={`${
+        inView ? (variant === 'rise' ? 'animate-rise' : 'animate-fade-up') : 'opacity-0'
+      } ${className}`}
+      style={{ animationDelay: `${step * 140}ms` }}
     >
       {children}
     </Tag>
