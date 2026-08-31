@@ -1,3 +1,4 @@
+import { Reveal } from '@/components/motion/Reveal';
 import { Card } from '@/components/ui/Card';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel, SectionTitle } from '@/components/ui/SectionLabel';
@@ -14,8 +15,10 @@ export function DailyMomentsSection() {
       <SectionTitle>{DAILY_MOMENTS_TITLE}</SectionTitle>
 
       <div className="mt-12 grid gap-4 sm:mt-14 md:grid-cols-3">
-        {DAILY_MOMENTS.map((item) => (
-          <Card key={item.title} {...item} />
+        {DAILY_MOMENTS.map((item, i) => (
+          <Reveal key={item.title} step={i}>
+            <Card {...item} className="h-full" />
+          </Reveal>
         ))}
       </div>
     </Section>

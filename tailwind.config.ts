@@ -19,6 +19,16 @@ const config: Config = {
           DEFAULT: '#00D5C8',
           weak: '#E6FAF8',
         },
+        /**
+         * 두 번째 색. 장식이 아니라 뜻이 있다.
+         * 앱이 정기는 민트, 긴급·반려는 주황 계열로 쓰므로 사이트도 그대로 따른다.
+         *   정기 = brand / 긴급 = accent
+         */
+        accent: {
+          DEFAULT: '#F59A3C',
+          weak: '#FFF3E5',
+          ink: '#A85E10',
+        },
         canvas: {
           DEFAULT: '#FFFFFF',
           tint: '#F2FBFC',
@@ -67,9 +77,15 @@ const config: Config = {
           from: { opacity: '0', transform: 'translateY(16px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
+        /** 히어로의 폰이 아주 느리게 떠 있는 정도. 눈에 띄면 과하다. */
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
       },
       animation: {
         'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
+        float: 'float 6s ease-in-out infinite',
       },
     },
   },

@@ -1,6 +1,6 @@
 'use client';
 
-import { useInView } from './useInView';
+import { useInView } from '@/components/motion/useInView';
 import { CYCLE_STEPS } from '@/lib/content/home';
 import type { CycleStep } from '@/lib/types';
 

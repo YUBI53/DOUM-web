@@ -1,3 +1,4 @@
+import { Reveal } from '@/components/motion/Reveal';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import {
@@ -21,7 +22,7 @@ export function OverviewSection() {
   return (
     <Section space="lg">
       <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
-        <div>
+        <Reveal>
           <SectionLabel>{OVERVIEW_LABEL}</SectionLabel>
 
           <h2 className="text-[25px] font-bold leading-[1.4] tracking-tighter text-ink sm:text-[30px] lg:text-[34px]">
@@ -29,9 +30,9 @@ export function OverviewSection() {
             <br />
             <span className="text-brand">{OVERVIEW_THESIS[1]}</span>
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="lg:pt-1">
+        <Reveal step={1} className="lg:pt-1">
           <div className="space-y-5">
             {OVERVIEW_BODY.map((paragraph) => (
               <p
@@ -46,7 +47,7 @@ export function OverviewSection() {
           <p className="mt-8 border-t border-line pt-8 text-[16px] font-semibold leading-relaxed tracking-tight text-ink sm:text-[17px]">
             {OVERVIEW_GOAL}
           </p>
-        </div>
+        </Reveal>
       </div>
     </Section>
   );

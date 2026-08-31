@@ -1,3 +1,4 @@
+import { Reveal } from '@/components/motion/Reveal';
 import { Button } from '@/components/ui/Button';
 import { Surface } from '@/components/ui/Card';
 import { Icon } from '@/components/ui/Icon';
@@ -16,8 +17,10 @@ export function PreviewSection() {
   return (
     <Section>
       <div className="grid gap-5">
-        {PREVIEW_BANDS.map((band) => (
-          <PreviewCard key={band.label} band={band} />
+        {PREVIEW_BANDS.map((band, i) => (
+          <Reveal key={band.label} step={i}>
+            <PreviewCard band={band} />
+          </Reveal>
         ))}
       </div>
     </Section>
