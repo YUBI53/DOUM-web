@@ -10,9 +10,12 @@
 
 export const SITE_NAME = 'DOUM';
 
-/** TODO(placeholder): 배포 도메인 미정. OG 이미지 절대경로 계산에 쓰인다. */
+/**
+ * 배포 주소. 카톡에 공유했을 때 뜨는 미리보기 이미지의 절대경로 계산에 쓴다.
+ * 나중에 직접 산 도메인을 붙이면 여기만 바꾸면 된다.
+ */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://doum.example.com';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://doum-web.vercel.app';
 
 // ─── 앱 연결 ───────────────────────────────────────────────────────────────
 // 웹의 모든 입력·처리는 앱으로 넘긴다. 웹에서 폼을 자체 구현하지 않는다.
